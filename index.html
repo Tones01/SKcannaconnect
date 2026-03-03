@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SK Cannabis Connect 2026 — RSVP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #162F29;
+      --green-hover: #1e3d35;
+      --gold: #B8922E;
+      --gold-light: #f0e4c8;
+      --white: #ffffff;
+      --off-white: #F8F7F5;
+      --border: #E8E4DE;
+      --text: #1a1a1a;
+      --text-mid: #555550;
+      --text-muted: #999992;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .nav-cta {
+      display: inline-block;
+      background: var(--green);
+      color: var(--white);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 2px;
+      transition: background 0.18s;
+    }
+
+    .nav-cta:hover { background: var(--green-hover); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 64px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px 80px 72px;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--off-white);
+      padding: 80px 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 4vw, 60px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--green);
+      margin-bottom: 28px;
+    }
+
+    h1 em { font-style: italic; color: var(--gold); }
+
+    .hero-body {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-mid);
+      max-width: 420px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-bottom: 48px;
+    }
+
+    .meta-line {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      color: var(--text-mid);
+      font-weight: 300;
+    }
+
+    .meta-line .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .meta-line strong { color: var(--text); font-weight: 500; }
+
+    .hero-btn {
+      display: inline-block;
+      background: var(--green);
+      color: var(--white);
+      font-size: 11.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 17px 38px;
+      border-radius: 2px;
+      align-self: flex-start;
+      transition: background 0.18s, transform 0.15s;
+    }
+
+    .hero-btn:hover { background: var(--green-hover); transform: translateY(-1px); }
+
+    /* Event card */
+    .event-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 44px 40px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.05);
+    }
+
+    .event-card-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .event-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--green);
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 24px;
+    }
+
+    .card-detail {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-detail:last-child { margin-bottom: 0; }
+
+    .card-detail-label {
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .card-detail-value {
+      font-size: 13.5px;
+      color: var(--text);
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    .card-tag {
+      display: inline-block;
+      background: var(--gold-light);
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    /* STATS */
+    .highlights {
+      border-top: 1px solid var(--border);
+      padding: 72px 72px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .highlight-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      color: var(--green);
+      font-weight: 400;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .highlight-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* WHAT TO EXPECT */
+    .expect {
+      background: var(--off-white);
+      border-top: 1px solid var(--border);
+      padding: 80px 72px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .expect-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      font-weight: 400;
+      color: var(--green);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .expect-left p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-mid);
+      font-weight: 300;
+    }
+
+    .expect-list { display: flex; flex-direction: column; }
+
+    .expect-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .expect-item:first-child { padding-top: 0; }
+    .expect-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .expect-icon {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+      background: var(--white);
+    }
+
+    .expect-text h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .expect-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    /* FORM */
+    .form-section {
+      border-top: 1px solid var(--border);
+      padding: 88px 72px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .form-intro { position: sticky; top: 88px; }
+
+    .form-intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--green);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .form-intro p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-mid);
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    .contact-block {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 22px;
+    }
+
+    .contact-block-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .contact-block a {
+      display: block;
+      font-size: 13px;
+      color: var(--green);
+      text-decoration: none;
+      margin-bottom: 4px;
+    }
+
+    .contact-block a:hover { color: var(--gold); }
+
+    .tf-wrap {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      min-height: 640px;
+      background: var(--off-white);
+    }
+
+    .tf-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 640px;
+      padding: 48px 36px;
+      text-align: center;
+      gap: 12px;
+    }
+
+    .tf-icon {
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      background: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .tf-placeholder h3 {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .tf-placeholder p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 340px;
+    }
+
+    .tf-placeholder code {
+      display: block;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 14px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--green);
+      text-align: left;
+      line-height: 1.8;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--green);
+      padding: 44px 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      font-size: 10.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 5px;
+    }
+
+    .footer-left p {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-right { text-align: right; }
+
+    .footer-right a {
+      display: block;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      margin-bottom: 4px;
+      transition: color 0.15s;
+    }
+
+    .footer-right a:hover { color: rgba(255,255,255,0.85); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 60px 28px 48px; border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-right { display: none; }
+      .highlights { grid-template-columns: 1fr 1fr; padding: 52px 28px; gap: 28px; }
+      .expect { grid-template-columns: 1fr; padding: 52px 28px; gap: 40px; }
+      .form-section { grid-template-columns: 1fr; padding: 52px 28px 72px; gap: 40px; }
+      .form-intro { position: static; }
+      footer { padding: 36px 28px; flex-direction: column; text-align: center; }
+      .footer-right { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SK Cannabis Connect · 2026</div>
+  <a href="#rsvp" class="nav-cta">Register Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">June 18, 2026 · Saskatoon</div>
+    <h1>Saskatchewan's<br>Cannabis <em>Community</em><br>Gets Together</h1>
+    <p class="hero-body">
+      An evening designed for the retailers and partners shaping Saskatchewan's cannabis industry. Good food, great conversation, live entertainment — and no agenda.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-line">
+        <div class="dot"></div>
+        <span><strong>June 18, 2026</strong> — Evening event</span>
+      </div>
+      <div class="meta-line">
+        <div class="dot"></div>
+        <span><strong>Studio 301</strong> — Saskatoon, SK</span>
+      </div>
+      <div class="meta-line">
+        <div class="dot"></div>
+        <span><strong>Complimentary</strong> — Registration required</span>
+      </div>
+      <div class="meta-line">
+        <div class="dot"></div>
+        <span>Presented by <strong>Open Fields Distribution</strong></span>
+      </div>
+    </div>
+    <a href="#rsvp" class="hero-btn">Reserve Your Spot</a>
+  </div>
+
+  <div class="hero-right">
+    <div class="event-card">
+      <div class="event-card-label">Event Details</div>
+      <div class="event-card-title">SK Cannabis<br>Connect 2026</div>
+      <div class="card-divider"></div>
+      <div class="card-detail">
+        <span class="card-detail-label">Date</span>
+        <span class="card-detail-value">June 18, 2026</span>
+      </div>
+      <div class="card-detail">
+        <span class="card-detail-label">Venue</span>
+        <span class="card-detail-value">Studio 301, Saskatoon</span>
+      </div>
+      <div class="card-detail">
+        <span class="card-detail-label">Format</span>
+        <span class="card-detail-value">Evening Mixer</span>
+      </div>
+      <div class="card-detail">
+        <span class="card-detail-label">Admission</span>
+        <span class="card-detail-value"><span class="card-tag">Complimentary</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="highlights">
+  <div>
+    <div class="highlight-num">150</div>
+    <div class="highlight-label">Expected guests from across Saskatchewan</div>
+  </div>
+  <div>
+    <div class="highlight-num">100+</div>
+    <div class="highlight-label">Retailers and buyers in attendance</div>
+  </div>
+  <div>
+    <div class="highlight-num">1</div>
+    <div class="highlight-label">Night to connect with the people you work with</div>
+  </div>
+  <div>
+    <div class="highlight-num">0</div>
+    <div class="highlight-label">Agendas, presentations, or sales pitches</div>
+  </div>
+</div>
+
+<!-- WHAT TO EXPECT -->
+<section class="expect">
+  <div class="expect-left">
+    <h2>What to<br><em>Expect</em></h2>
+    <p>SK Cannabis Connect is a client appreciation event — a chance for Saskatchewan's cannabis community to spend an evening together outside of the day-to-day.</p>
+  </div>
+  <div class="expect-list">
+    <div class="expect-item">
+      <div class="expect-icon">🥂</div>
+      <div class="expect-text">
+        <h4>Food & Drinks</h4>
+        <p>A full evening of food and drink, covered for all registered guests.</p>
+      </div>
+    </div>
+    <div class="expect-item">
+      <div class="expect-icon">🎶</div>
+      <div class="expect-text">
+        <h4>Live Entertainment</h4>
+        <p>DJ and live caricature artist on-site throughout the evening.</p>
+      </div>
+    </div>
+    <div class="expect-item">
+      <div class="expect-icon">🎁</div>
+      <div class="expect-text">
+        <h4>Prizes & Raffle Draws</h4>
+        <p>Industry-sponsored prizes throughout the night, including a grand prize draw.</p>
+      </div>
+    </div>
+    <div class="expect-item">
+      <div class="expect-icon">🤝</div>
+      <div class="expect-text">
+        <h4>Real Connections</h4>
+        <p>~150 retailers, budtenders, and partners — all in one room, no agenda required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="form-section" id="rsvp">
+  <div class="form-intro">
+    <h2>Reserve<br>Your Spot</h2>
+    <p>Free to attend — registration required. Add your team members during sign-up.</p>
+    <div class="contact-block">
+      <div class="contact-block-label">Questions? Contact Ethan</div>
+      <a href="mailto:etonnies@openfields.ca">etonnies@openfields.ca</a>
+      <a href="tel:3067749485">306 774 9485</a>
+    </div>
+  </div>
+
+  <div class="tf-wrap">
+    <!--
+      TYPEFORM EMBED — REPLACE THIS BLOCK
+      =====================================
+      1. Typeform → Share → Embed → Standard
+      2. Copy the snippet and paste it here
+      3. Delete this entire comment block
+
+      Example:
+      <div data-tf-live="YOUR_FORM_ID"></div>
+      <script src="//embed.typeform.com/next/embed.js"></script>
+    -->
+    <div class="tf-placeholder">
+      <div class="tf-icon">📋</div>
+      <h3>RSVP Form</h3>
+      <p>Paste your Typeform embed code here once the form is live — this placeholder will be replaced.</p>
+      <code>
+        &lt;div data-tf-live="YOUR_FORM_ID"&gt;&lt;/div&gt;<br>
+        &lt;script src="//embed.typeform.com/next/embed.js"&gt;&lt;/script&gt;
+      </code>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-brand">Open Fields Distribution</div>
+    <p>Presented by OFD · Saskatoon, Saskatchewan</p>
+  </div>
+  <div class="footer-right">
+    <a href="mailto:etonnies@openfields.ca">etonnies@openfields.ca</a>
+    <a href="tel:3067749485">306 774 9485</a>
+  </div>
+</footer>
+
+</body>
+</html>
