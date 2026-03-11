@@ -1,1071 +1,1278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SK Cannabis Connect 2026 — RSVP</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --green: #162F29;
-      --green-hover: #1e3d35;
-      --gold: #B8922E;
-      --gold-light: #f0e4c8;
-      --white: #ffffff;
-      --off-white: #F8F7F5;
-      --border: #E8E4DE;
-      --text: #1a1a1a;
-      --text-mid: #555550;
-      --text-muted: #999992;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--text);
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 64px;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(12px);
-      border-top: 4px solid var(--gold);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-logo img {
-      height: 34px;
-      width: auto;
-      max-width: 160px;
-      object-fit: contain;
-      display: block;
-    }
-
-    /* Fallback text if logo image hasn't been uploaded yet */
-    .nav-logo img[src="assets/logo.png"]:not([complete]) {
-      display: none;
-    }
-
-    .hero-logo {
-      margin-bottom: 28px;
-    }
-
-    .hero-logo img {
-      height: 56px;
-      width: auto;
-      max-width: 220px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .nav-cta {
-      display: inline-block;
-      background: var(--green);
-      color: var(--white);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 500;
-      text-decoration: none;
-      padding: 10px 22px;
-      border-radius: 2px;
-      transition: background 0.18s;
-    }
-
-    .nav-cta:hover { background: var(--green-hover); }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding-top: 64px;
-    }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 80px 64px 80px 72px;
-      border-right: 1px solid var(--border);
-    }
-
-    .hero-right {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--off-white);
-      padding: 80px 64px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 10.5px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 28px;
-    }
-
-    .eyebrow::before {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 1px;
-      background: var(--gold);
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(38px, 4vw, 60px);
-      font-weight: 400;
-      line-height: 1.1;
-      color: var(--green);
-      margin-bottom: 28px;
-    }
-
-    h1 em { font-style: italic; color: var(--gold); }
-
-    .hero-body {
-      font-size: 16px;
-      line-height: 1.75;
-      color: var(--text-mid);
-      max-width: 420px;
-      margin-bottom: 40px;
-      font-weight: 300;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      margin-bottom: 48px;
-    }
-
-    .meta-line {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 14px;
-      color: var(--text-mid);
-      font-weight: 300;
-    }
-
-    .meta-line .dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
-
-    .meta-line strong { color: var(--text); font-weight: 500; }
-
-    .hero-btn {
-      display: inline-block;
-      background: var(--green);
-      color: var(--white);
-      font-size: 11.5px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 500;
-      text-decoration: none;
-      padding: 17px 38px;
-      border-radius: 2px;
-      align-self: flex-start;
-      transition: background 0.18s, transform 0.15s;
-    }
-
-    .hero-btn:hover { background: var(--green-hover); transform: translateY(-1px); }
-
-    /* Event card */
-    .event-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 44px 40px;
-      width: 100%;
-      max-width: 360px;
-      box-shadow: 0 2px 24px rgba(0,0,0,0.05);
-    }
-
-    .event-card-label {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-
-    .event-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 400;
-      color: var(--green);
-      line-height: 1.25;
-      margin-bottom: 28px;
-    }
-
-    .card-divider {
-      height: 1px;
-      background: var(--border);
-      margin-bottom: 24px;
-    }
-
-    .card-detail {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .card-detail:last-child { margin-bottom: 0; }
-
-    .card-detail-label {
-      font-size: 10.5px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .card-detail-value {
-      font-size: 13.5px;
-      color: var(--text);
-      text-align: right;
-      line-height: 1.4;
-    }
-
-    .card-tag {
-      display: inline-block;
-      background: var(--gold-light);
-      color: var(--gold);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 2px;
-    }
-
-    /* STATS */
-    .highlights {
-      border-top: 1px solid var(--border);
-      padding: 72px 72px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-    }
-
-    .highlight-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 48px;
-      color: var(--green);
-      font-weight: 400;
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-
-    .highlight-label {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      font-weight: 300;
-    }
-
-    /* SPONSORS MARQUEE */
-    .sponsors {
-      border-top: 1px solid var(--border);
-      padding: 56px 0 60px;
-      background: var(--white);
-      overflow: hidden;
-    }
-
-    .sponsors-heading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-size: 10.5px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 36px;
-    }
-
-    .sponsors-heading::before,
-    .sponsors-heading::after {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.5;
-    }
-
-    .sponsors-track-wrap {
-      position: relative;
-    }
-
-    .sponsors-track-wrap::before,
-    .sponsors-track-wrap::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 120px;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .sponsors-track-wrap::before {
-      left: 0;
-      background: linear-gradient(to right, var(--white), transparent);
-    }
-
-    .sponsors-track-wrap::after {
-      right: 0;
-      background: linear-gradient(to left, var(--white), transparent);
-    }
-
-    .sponsors-row {
-      display: flex;
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-
-    .sponsors-row:last-child { margin-bottom: 0; }
-
-    .sponsors-track {
-      display: flex;
-      gap: 48px;
-      align-items: center;
-      will-change: transform;
-      flex-shrink: 0;
-    }
-
-    .sponsors-row--left .sponsors-track { animation: marquee-left 28s linear infinite; }
-    .sponsors-row--right .sponsors-track { animation: marquee-right 32s linear infinite; }
-
-    @keyframes marquee-left {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    @keyframes marquee-right {
-      0%   { transform: translateX(-50%); }
-      100% { transform: translateX(0); }
-    }
-
-    .sponsors-logo {
-      height: 40px;
-      width: auto;
-      max-width: 130px;
-      object-fit: contain;
-      display: block;
-      flex-shrink: 0;
-      filter: grayscale(100%) opacity(0.55);
-      transition: filter 0.25s;
-    }
-
-    .sponsors-logo:hover {
-      filter: grayscale(0%) opacity(1);
-    }
-
-    @media (max-width: 960px) {
-      .sponsors { padding: 44px 0 48px; }
-      .sponsors-logo { height: 32px; max-width: 100px; }
-      .sponsors-track { gap: 36px; }
-      .sponsors-track-wrap::before,
-      .sponsors-track-wrap::after { width: 60px; }
-    }
-
-    /* WHAT TO EXPECT */
-    .expect {
-      background: var(--off-white);
-      border-top: 1px solid var(--border);
-      padding: 80px 72px;
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .expect-left h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 38px;
-      font-weight: 400;
-      color: var(--green);
-      line-height: 1.15;
-      margin-bottom: 18px;
-    }
-
-    .expect-left p {
-      font-size: 15px;
-      line-height: 1.75;
-      color: var(--text-mid);
-      font-weight: 300;
-    }
-
-    .expect-list { display: flex; flex-direction: column; }
-
-    .expect-item {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .expect-item:first-child { padding-top: 0; }
-    .expect-item:last-child { border-bottom: none; padding-bottom: 0; }
-
-    .expect-icon {
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      flex-shrink: 0;
-      background: var(--white);
-    }
-
-    .expect-text h4 {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 3px;
-    }
-
-    .expect-text p {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.55;
-      font-weight: 300;
-    }
-
-    /* LINEUP */
-    .lineup {
-      border-top: 1px solid var(--border);
-      padding: 80px 72px;
-      background: var(--white);
-    }
-
-    .lineup-header {
-      text-align: center;
-      margin-bottom: 52px;
-    }
-
-    .lineup-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 38px;
-      font-weight: 400;
-      color: var(--green);
-      line-height: 1.15;
-      margin-bottom: 10px;
-    }
-
-    .lineup-header h2 em { font-style: italic; color: var(--gold); }
-
-    .lineup-header p {
-      font-size: 14px;
-      color: var(--text-muted);
-      font-weight: 300;
-      letter-spacing: 0.04em;
-    }
-
-    .lineup-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .lineup-card {
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 36px 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .lineup-icon {
-      width: 48px;
-      height: 48px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      background: var(--off-white);
-      flex-shrink: 0;
-    }
-
-    .lineup-type {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    .lineup-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--green);
-      line-height: 1.2;
-    }
-
-    .lineup-desc {
-      font-size: 13.5px;
-      line-height: 1.65;
-      color: var(--text-mid);
-      font-weight: 300;
-    }
-
-    @media (max-width: 960px) {
-      .lineup { padding: 52px 28px; }
-      .lineup-grid { grid-template-columns: 1fr; gap: 16px; }
-    }
-
-    /* GALLERY */
-    .gallery-section {
-      border-top: 1px solid var(--border);
-      padding: 80px 72px;
-      background: var(--off-white);
-    }
-
-    .gallery-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .gallery-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 38px;
-      font-weight: 400;
-      color: var(--green);
-      line-height: 1.15;
-      margin-bottom: 10px;
-    }
-
-    .gallery-header p {
-      font-size: 14px;
-      color: var(--text-muted);
-      font-weight: 300;
-      letter-spacing: 0.04em;
-    }
-
-    .gallery-grid {
-      columns: 4;
-      column-gap: 6px;
-    }
-
-    .gallery-item {
-      width: 100%;
-      display: block;
-      margin-bottom: 6px;
-      break-inside: avoid;
-      border-radius: 2px;
-      overflow: hidden;
-      transition: transform 0.22s;
-    }
-
-    .gallery-item:hover { transform: scale(1.015); }
-
-    .gallery-item img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    @media (max-width: 960px) {
-      .gallery-section { padding: 52px 28px; }
-      .gallery-grid { columns: 3; }
-    }
-
-    @media (max-width: 600px) {
-      .gallery-grid { columns: 2; }
-    }
-
-    /* FORM */
-    .form-section {
-      border-top: 1px solid var(--border);
-      padding: 88px 72px 100px;
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    .form-intro { position: sticky; top: 88px; }
-
-    .form-intro h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 36px;
-      font-weight: 400;
-      color: var(--green);
-      line-height: 1.15;
-      margin-bottom: 14px;
-    }
-
-    .form-intro p {
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--text-mid);
-      font-weight: 300;
-      margin-bottom: 28px;
-    }
-
-    .contact-block {
-      background: var(--off-white);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 22px;
-    }
-
-    .contact-block-label {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-
-    .contact-block a {
-      display: block;
-      font-size: 13px;
-      color: var(--green);
-      text-decoration: none;
-      margin-bottom: 4px;
-    }
-
-    .contact-block a:hover { color: var(--gold); }
-
-    .tf-wrap {
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      min-height: 640px;
-      background: var(--off-white);
-    }
-
-    .tf-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 640px;
-      padding: 48px 36px;
-      text-align: center;
-      gap: 12px;
-    }
-
-    .tf-icon {
-      width: 50px;
-      height: 50px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      background: var(--white);
-      margin-bottom: 4px;
-    }
-
-    .tf-placeholder h3 {
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .tf-placeholder p {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      max-width: 340px;
-    }
-
-    .tf-placeholder code {
-      display: block;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 14px 18px;
-      font-family: 'Courier New', monospace;
-      font-size: 11px;
-      color: var(--green);
-      text-align: left;
-      line-height: 1.8;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    /* FOOTER */
-    footer {
-      background: var(--green);
-      padding: 44px 72px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-brand {
-      font-size: 10.5px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 5px;
-    }
-
-    .footer-left p {
-      font-size: 12.5px;
-      color: rgba(255,255,255,0.3);
-    }
-
-    .footer-right { text-align: right; }
-
-    .footer-right a {
-      display: block;
-      font-size: 13px;
-      color: rgba(255,255,255,0.5);
-      text-decoration: none;
-      margin-bottom: 4px;
-      transition: color 0.15s;
-    }
-
-    .footer-right a:hover { color: rgba(255,255,255,0.85); }
-
-    /* RESPONSIVE */
-    @media (max-width: 960px) {
-      nav { padding: 0 24px; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 60px 28px 48px; border-right: none; border-bottom: 1px solid var(--border); }
-      .hero-right { display: none; }
-      .highlights { grid-template-columns: 1fr 1fr; padding: 52px 28px; gap: 28px; }
-      .expect { grid-template-columns: 1fr; padding: 52px 28px; gap: 40px; }
-      .form-section { grid-template-columns: 1fr; padding: 52px 28px 72px; gap: 40px; }
-      .form-intro { position: static; }
-      footer { padding: 36px 28px; flex-direction: column; text-align: center; }
-      .footer-right { text-align: center; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK Cannabis Connect 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #162F29;
+  --gold: #C9A84C;
+  --gold-light: #ddb95e;
+  --cream: #F4EFE4;
+  --warm-white: #FAFAF7;
+  --paper: #F0EBE0;
+  --ink: #1a1a18;
+  --muted: #7a7468;
+  --border: rgba(26,26,24,0.1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--warm-white);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* GRAIN OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 3rem;
+  mix-blend-mode: normal;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: rgba(250,250,247,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  padding: 0.85rem 1.75rem;
+}
+
+.nav-logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--ink); }
+
+.nav-cta {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--warm-white);
+  background: var(--green);
+  padding: 0.6rem 1.5rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--green); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: var(--warm-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3rem 4rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Big decorative date stamp top right */
+.hero-date-stamp {
+  position: absolute;
+  top: 7rem;
+  right: 3rem;
+  text-align: right;
+  z-index: 2;
+}
+
+.hero-date-stamp .stamp-day {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(6rem, 14vw, 12rem);
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(22,47,41,0.12);
+  line-height: 0.85;
+  user-select: none;
+}
+
+.hero-date-stamp .stamp-month {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: right;
+  margin-top: 0.5rem;
+}
+
+/* Green accent pill */
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--green);
+  color: var(--cream);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2.5rem;
+  width: fit-content;
+}
+
+.hero-pill::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.hero-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  line-height: 0.95;
+  color: var(--ink);
+  max-width: 900px;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title .accent {
+  color: var(--green);
+  font-style: italic;
+}
+
+.hero-title .gold-word {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-desc {
+  max-width: 420px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--green);
+  color: var(--cream);
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1.1rem 2rem;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.hero-btn .arrow {
+  width: 1.5rem; height: 1.5rem;
+  border: 1.5px solid rgba(244,239,228,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  transition: transform 0.25s;
+}
+
+.hero-btn:hover { background: var(--gold); color: var(--green); }
+.hero-btn:hover .arrow { transform: translateX(3px); border-color: rgba(22,47,41,0.4); }
+
+.hero-fine {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-align: right;
+}
+
+/* TICKER STRIP */
+.ticker {
+  background: var(--green);
+  padding: 0.85rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-inner {
+  display: inline-flex;
+  gap: 0;
+  animation: ticker 30s linear infinite;
+}
+
+.ticker-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(244,239,228,0.5);
+  padding: 0 2rem;
+}
+
+.ticker-item.highlight {
+  color: var(--gold);
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+
+.stat {
+  padding: 3.5rem 2.5rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.stat:last-child { border-right: none; }
+
+.stat::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold);
+  transition: width 0.4s ease;
+}
+.stat:hover::after { width: 100%; }
+
+.stat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 4rem;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+  font-weight: 400;
+  max-width: 160px;
+}
+
+/* SPONSORS */
+.sponsors {
+  padding: 5rem 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sponsors-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 1.5rem; height: 1px;
+  background: var(--gold);
+}
+
+.sponsors-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--ink);
+  line-height: 1;
+}
+
+.sponsors-title em { font-style: italic; color: var(--green); }
+
+.sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.sponsor-card {
+  background: var(--warm-white);
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.sponsor-card:hover { background: var(--cream); }
+
+.sponsor-card::before {
+  content: 'Grand Prize';
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+}
+
+.sponsor-logo-box {
+  width: 100%;
+  height: 70px;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  color: rgba(26,26,24,0.25);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sponsor-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.4rem;
+  color: var(--ink);
+}
+
+/* EXPECT */
+.expect {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+
+.expect-left {
+  padding: 6rem 3rem;
+  border-right: 1px solid var(--border);
+  background: var(--green);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Big decorative text */
+.expect-left::before {
+  content: 'JUNE\A18';
+  white-space: pre;
+  position: absolute;
+  bottom: -2rem;
+  right: -1rem;
+  font-family: 'Instrument Serif', serif;
+  font-size: 9rem;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244,239,228,0.07);
+  pointer-events: none;
+  user-select: none;
+}
+
+.expect-left .eyebrow { color: rgba(201,168,76,0.7); }
+.expect-left .eyebrow::before { background: rgba(201,168,76,0.7); }
+
+.expect-heading {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--cream);
+  line-height: 1;
+  margin: 1.25rem 0 2rem;
+}
+
+.expect-heading em { font-style: italic; color: var(--gold); }
+
+.expect-body {
+  font-size: 0.9rem;
+  color: rgba(244,239,228,0.55);
+  line-height: 1.8;
+  font-weight: 400;
+  max-width: 340px;
+}
+
+.expect-right {
+  background: var(--warm-white);
+}
+
+.expect-item {
+  padding: 2.25rem 3rem;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  transition: background 0.2s;
+}
+
+.expect-item:hover { background: var(--cream); }
+.expect-item:last-child { border-bottom: none; }
+
+.expect-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--gold);
+  padding-top: 0.35rem;
+  letter-spacing: 0.05em;
+}
+
+.expect-item-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.01em;
+}
+
+.expect-item-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* SCHEDULE */
+.schedule {
+  padding: 6rem 3rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--paper);
+}
+
+.schedule-header {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.schedule-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--ink);
+  line-height: 1;
+}
+.schedule-title em { font-style: italic; color: var(--green); }
+
+.schedule-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.schedule-block {
+  background: var(--warm-white);
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule-block.featured {
+  background: var(--green);
+}
+
+.schedule-block::after {
+  content: attr(data-time);
+  position: absolute;
+  bottom: 1.5rem; right: 2rem;
+  font-family: 'Instrument Serif', serif;
+  font-size: 5rem;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(26,26,24,0.05);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.schedule-block.featured::after {
+  -webkit-text-stroke: 1px rgba(244,239,228,0.06);
+}
+
+.schedule-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.schedule-time-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,168,76,0.12);
+  padding: 0.3rem 0.7rem;
+}
+
+.schedule-block.featured .schedule-time-badge {
+  background: rgba(201,168,76,0.18);
+}
+
+.schedule-period {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.schedule-block.featured .schedule-period {
+  color: rgba(244,239,228,0.35);
+}
+
+.schedule-block-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.75rem;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
+}
+
+.schedule-block.featured .schedule-block-title {
+  color: var(--cream);
+}
+
+.schedule-block-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.7;
+  font-weight: 400;
+  max-width: 380px;
+}
+
+.schedule-block.featured .schedule-block-desc {
+  color: rgba(244,239,228,0.5);
+}
+
+.schedule-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.chip {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.schedule-block.featured .chip {
+  border-color: rgba(244,239,228,0.12);
+  color: rgba(244,239,228,0.4);
+}
+
+/* GALLERY */
+.gallery {
+  border-bottom: 1px solid var(--border);
+}
+
+.gallery-header {
+  padding: 4rem 3rem 2.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.gallery-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--ink);
+}
+.gallery-title em { font-style: italic; color: var(--green); }
+
+.gallery-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  background: var(--paper);
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+}
+.gallery-item:last-child { border-right: none; }
+
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0.7);
+  transition: filter 0.3s, transform 0.4s;
+}
+.gallery-item:hover img { filter: saturate(1); transform: scale(1.04); }
+
+.gallery-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(26,26,24,0.15);
+}
+
+/* LP MARQUEE */
+.lp-marquee {
+  background: var(--paper);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  overflow: hidden;
+}
+
+.lp-marquee-header {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.lp-marquee-label {
+  flex-shrink: 0;
+  background: var(--green);
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1.1rem 1.75rem;
+  white-space: nowrap;
+  border-right: 1px solid rgba(244,239,228,0.1);
+}
+
+.lp-track-wrap {
+  overflow: hidden;
+  flex: 1;
+}
+
+.lp-track {
+  display: inline-flex;
+  gap: 0;
+  animation: lpScroll 35s linear infinite;
+  white-space: nowrap;
+}
+
+.lp-track:hover { animation-play-state: paused; }
+
+.lp-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.05rem;
+  color: var(--ink);
+  padding: 0.85rem 2.5rem;
+  border-right: 1px solid var(--border);
+  transition: background 0.2s, color 0.2s;
+  cursor: default;
+}
+
+.lp-name:hover {
+  background: var(--green);
+  color: var(--cream);
+}
+
+.lp-dot {
+  font-size: 0.4rem;
+  color: var(--gold);
+  padding: 0.85rem 0;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--border);
+  padding-left: 0; padding-right: 0;
+  width: 2px;
+}
+
+@keyframes lpScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* RSVP */
+.rsvp {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+}
+
+.rsvp-left {
+  padding: 6rem 3rem;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rsvp-heading {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--ink);
+  line-height: 0.95;
+  margin: 1.25rem 0 2rem;
+}
+
+.rsvp-heading em { font-style: italic; color: var(--green); }
+
+.rsvp-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 360px;
+}
+
+.rsvp-contact {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.rsvp-contact-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.rsvp-contact-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.rsvp-contact-info {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+  letter-spacing: 0.03em;
+}
+
+.rsvp-right {
+  background: var(--green);
+  padding: 6rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Big decorative BG text */
+.rsvp-right::before {
+  content: 'RSVP';
+  position: absolute;
+  bottom: -2rem; right: -1rem;
+  font-family: 'Instrument Serif', serif;
+  font-size: 14rem;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244,239,228,0.05);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.rsvp-card-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.rsvp-card-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.75rem;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 2.5rem;
+}
+
+.rsvp-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(244,239,228,0.08);
+}
+
+.rsvp-meta-line {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(244,239,228,0.45);
+  letter-spacing: 0.05em;
+}
+.rsvp-meta-line span { color: rgba(244,239,228,0.8); }
+
+.rsvp-form-embed {
+  background: rgba(244,239,228,0.04);
+  border: 1px dashed rgba(201,168,76,0.25);
+  padding: 4rem 2rem;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: rgba(244,239,228,0.2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.rsvp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--gold);
+  color: var(--green);
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1.1rem 1.5rem;
+  text-decoration: none;
+  transition: background 0.2s;
+  position: relative;
+  z-index: 2;
+}
+.rsvp-btn:hover { background: var(--gold-light); }
+
+.rsvp-btn-arrow {
+  font-size: 1rem;
+}
+
+.rsvp-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  color: rgba(244,239,228,0.25);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 0.75rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  padding: 2.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-left {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(250,250,247,0.25);
+}
+
+.footer-center {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: rgba(250,250,247,0.15);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.footer-right {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: rgba(250,250,247,0.25);
+  text-align: right;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-pill { animation: fadeUp 0.5s ease 0.1s both; }
+.hero-title { animation: fadeUp 0.6s ease 0.2s both; }
+.hero-bottom { animation: fadeUp 0.6s ease 0.4s both; }
+</style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    <img src="assets/logo.png" alt="SK Cannabis Connect 2026">
+  <div class="nav-inner">
+    <div class="nav-logo">SK Cannabis Connect · 2026</div>
+    <div class="nav-links">
+      <a href="#expect" class="nav-link">The Evening</a>
+      <a href="#schedule" class="nav-link">Schedule</a>
+      <a href="#rsvp" class="nav-cta">Reserve Your Spot</a>
+    </div>
   </div>
-  <a href="#rsvp" class="nav-cta">Register Now</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-left">
-    <div class="hero-logo">
-      <img src="assets/logo.png" alt="SK Cannabis Connect 2026">
-    </div>
-    <div class="eyebrow">June 18, 2026 · Saskatoon</div>
-    <h1>Saskatchewan's<br>Cannabis <em>Community</em><br>Gets Together</h1>
-    <p class="hero-body">
-      An evening designed for the retailers and partners shaping Saskatchewan's cannabis industry. Good food, great conversation, live entertainment — and no agenda.
-    </p>
-    <div class="hero-meta">
-      <div class="meta-line">
-        <div class="dot"></div>
-        <span><strong>June 18, 2026</strong> — Evening event</span>
-      </div>
-      <div class="meta-line">
-        <div class="dot"></div>
-        <span><strong>Studio 301</strong> — Saskatoon, SK</span>
-      </div>
-      <div class="meta-line">
-        <div class="dot"></div>
-        <span><strong>Complimentary</strong> — Registration required</span>
-      </div>
-      <div class="meta-line">
-        <div class="dot"></div>
-        <span>Presented by <strong>Open Fields Distribution</strong></span>
-      </div>
-    </div>
-    <a href="#rsvp" class="hero-btn">Reserve Your Spot</a>
+  <div class="hero-date-stamp">
+    <div class="stamp-day">18</div>
+    <div class="stamp-month">June · Saskatoon</div>
   </div>
 
-  <div class="hero-right">
-    <div class="event-card">
-      <div class="event-card-label">Event Details</div>
-      <div class="event-card-title">SK Cannabis<br>Connect 2026</div>
-      <div class="card-divider"></div>
-      <div class="card-detail">
-        <span class="card-detail-label">Date</span>
-        <span class="card-detail-value">June 18, 2026</span>
-      </div>
-      <div class="card-detail">
-        <span class="card-detail-label">Venue</span>
-        <span class="card-detail-value">Studio 301, Saskatoon</span>
-      </div>
-      <div class="card-detail">
-        <span class="card-detail-label">Format</span>
-        <span class="card-detail-value">Evening Mixer</span>
-      </div>
-      <div class="card-detail">
-        <span class="card-detail-label">Admission</span>
-        <span class="card-detail-value"><span class="card-tag">Complimentary</span></span>
-      </div>
+  <div class="hero-pill">Presented by Open Fields Distribution</div>
+
+  <h1 class="hero-title">
+    Saskatchewan's<br>
+    Cannabis <span class="accent">Community</span><br>
+    <span class="gold-word">Gets Together</span>
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      Every year, we get the Saskatchewan cannabis industry together for a night that has nothing to do with work. Good food, good drinks, good people. That's it.
+    </p>
+    <div class="hero-actions">
+      <a href="#rsvp" class="hero-btn">
+        Reserve Your Spot
+        <span class="arrow">→</span>
+      </a>
+      <div class="hero-fine">Studio 301 · Free to attend · Registration required</div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="highlights">
-  <div>
-    <div class="highlight-num">150</div>
-    <div class="highlight-label">Expected guests from across Saskatchewan</div>
-  </div>
-  <div>
-    <div class="highlight-num">100+</div>
-    <div class="highlight-label">Retailers and buyers in attendance</div>
-  </div>
-  <div>
-    <div class="highlight-num">1</div>
-    <div class="highlight-label">Night to connect with the people you work with</div>
-  </div>
-  <div>
-    <div class="highlight-num">0</div>
-    <div class="highlight-label">Agendas, presentations, or sales pitches</div>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item highlight">June 18, 2026</span>
+    <span class="ticker-item">Studio 301 · Saskatoon</span>
+    <span class="ticker-item highlight">Free to Attend</span>
+    <span class="ticker-item">Live DJ</span>
+    <span class="ticker-item highlight">Stand-Up Comedy</span>
+    <span class="ticker-item">Caricature Artist</span>
+    <span class="ticker-item highlight">Grand Prize Draws</span>
+    <span class="ticker-item">150+ Industry Guests</span>
+    <span class="ticker-item highlight">No Pitches. No Agenda.</span>
+    <span class="ticker-item">Open Fields Distribution</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item highlight">June 18, 2026</span>
+    <span class="ticker-item">Studio 301 · Saskatoon</span>
+    <span class="ticker-item highlight">Free to Attend</span>
+    <span class="ticker-item">Live DJ</span>
+    <span class="ticker-item highlight">Stand-Up Comedy</span>
+    <span class="ticker-item">Caricature Artist</span>
+    <span class="ticker-item highlight">Grand Prize Draws</span>
+    <span class="ticker-item">150+ Industry Guests</span>
+    <span class="ticker-item highlight">No Pitches. No Agenda.</span>
+    <span class="ticker-item">Open Fields Distribution</span>
   </div>
 </div>
 
+<!-- STATS -->
+<section class="stats">
+  <div class="stat">
+    <div class="stat-num">150</div>
+    <div class="stat-label">People from across the Saskatchewan cannabis industry</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100+</div>
+    <div class="stat-label">Retailers and budtenders in the room</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">1</div>
+    <div class="stat-label">Night with no agenda, no booths, no pitches</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Presentations. Seriously, none.</div>
+  </div>
+</section>
+
 <!-- SPONSORS -->
 <section class="sponsors">
-  <div class="sponsors-heading">Presented With</div>
-  <div class="sponsors-track-wrap">
-    <!-- Row 1: scrolls left -->
-    <div class="sponsors-row sponsors-row--left">
-      <!-- Content duplicated for seamless loop -->
-      <div class="sponsors-track">
-        <img src="assets/sponsors/logo-01.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-02.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-03.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-04.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-05.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-06.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-07.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-08.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-09.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-10.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-11.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-12.png" alt="Sponsor" class="sponsors-logo">
-        <!-- Duplicate set for seamless loop -->
-        <img src="assets/sponsors/logo-01.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-02.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-03.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-04.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-05.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-06.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-07.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-08.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-09.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-10.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-11.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-12.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-      </div>
+  <div class="sponsors-header">
+    <div>
+      <div class="eyebrow">Grand Prize Sponsors</div>
+      <h2 class="sponsors-title">Presented <em>With</em></h2>
     </div>
-    <!-- Row 2: scrolls right -->
-    <div class="sponsors-row sponsors-row--right">
-      <div class="sponsors-track">
-        <img src="assets/sponsors/logo-07.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-08.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-09.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-10.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-11.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-12.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-01.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-02.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-03.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-04.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-05.png" alt="Sponsor" class="sponsors-logo">
-        <img src="assets/sponsors/logo-06.png" alt="Sponsor" class="sponsors-logo">
-        <!-- Duplicate set for seamless loop -->
-        <img src="assets/sponsors/logo-07.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-08.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-09.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-10.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-11.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-12.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-01.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-02.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-03.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-04.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-05.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-        <img src="assets/sponsors/logo-06.png" alt="Sponsor" class="sponsors-logo" aria-hidden="true">
-      </div>
+  </div>
+  <div class="sponsor-grid">
+    <div class="sponsor-card">
+      <div class="sponsor-logo-box">Logo</div>
+      <div class="sponsor-name">BudNked</div>
+    </div>
+    <div class="sponsor-card">
+      <div class="sponsor-logo-box">Logo</div>
+      <div class="sponsor-name">Pure Sunfarms</div>
+    </div>
+    <div class="sponsor-card">
+      <div class="sponsor-logo-box">Logo</div>
+      <div class="sponsor-name">Herba Farms</div>
     </div>
   </div>
 </section>
+
+<!-- LP MARQUEE -->
+<div class="lp-marquee">
+  <div class="lp-marquee-header">
+    <div class="lp-marquee-label">LP Showcase · Afternoon Mixer</div>
+    <div class="lp-track-wrap">
+      <div class="lp-track">
+        <span class="lp-name">Auxly Cannabis</span>
+        <span class="lp-name">FIGR</span>
+        <span class="lp-name">Pure Sunfarms</span>
+        <span class="lp-name">Redecan</span>
+        <span class="lp-name">Spinach</span>
+        <span class="lp-name">Broken Coast</span>
+        <span class="lp-name">Deciem Cannabis</span>
+        <span class="lp-name">Kolab Project</span>
+        <span class="lp-name">Wana Brands</span>
+        <span class="lp-name">Versus Cannabis</span>
+        <span class="lp-name">Houseplant</span>
+        <span class="lp-name">LP Placeholder</span>
+        <span class="lp-name">LP Placeholder</span>
+        <!-- duplicate for seamless loop -->
+        <span class="lp-name">Auxly Cannabis</span>
+        <span class="lp-name">FIGR</span>
+        <span class="lp-name">Pure Sunfarms</span>
+        <span class="lp-name">Redecan</span>
+        <span class="lp-name">Spinach</span>
+        <span class="lp-name">Broken Coast</span>
+        <span class="lp-name">Deciem Cannabis</span>
+        <span class="lp-name">Kolab Project</span>
+        <span class="lp-name">Wana Brands</span>
+        <span class="lp-name">Versus Cannabis</span>
+        <span class="lp-name">Houseplant</span>
+        <span class="lp-name">LP Placeholder</span>
+        <span class="lp-name">LP Placeholder</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- WHAT TO EXPECT -->
-<section class="expect">
+<section class="expect" id="expect">
   <div class="expect-left">
-    <h2>What to<br><em>Expect</em></h2>
-    <p>SK Cannabis Connect is a client appreciation event — a chance for Saskatchewan's cannabis community to spend an evening together outside of the day-to-day.</p>
+    <div class="eyebrow">The Evening</div>
+    <h2 class="expect-heading">What to<br><em>Expect</em></h2>
+    <p class="expect-body">
+      This is our annual thank-you to the retailers, budtenders, and partners we work with every day. Come out, meet some people, eat some food. Leave the badge at home.
+    </p>
   </div>
-  <div class="expect-list">
+  <div class="expect-right">
     <div class="expect-item">
-      <div class="expect-icon">🥂</div>
-      <div class="expect-text">
-        <h4>Food & Drinks</h4>
-        <p>A full evening of food and drink, covered for all registered guests.</p>
+      <div class="expect-num">01</div>
+      <div>
+        <div class="expect-item-title">Food &amp; Drinks</div>
+        <div class="expect-item-desc">Dinner and drinks are on us all night. Just show up.</div>
       </div>
     </div>
     <div class="expect-item">
-      <div class="expect-icon">🎶</div>
-      <div class="expect-text">
-        <h4>Live Entertainment</h4>
-        <p>Live DJ, stand-up comedy, and a caricature artist — a full night of entertainment.</p>
+      <div class="expect-num">02</div>
+      <div>
+        <div class="expect-item-title">Live Entertainment</div>
+        <div class="expect-item-desc">A DJ, a comedian, and a caricature artist walk into a bar. It's a good night. The caricature station is brought to you by FIGR.</div>
       </div>
     </div>
     <div class="expect-item">
-      <div class="expect-icon">🎁</div>
-      <div class="expect-text">
-        <h4>Prizes & Raffle Draws</h4>
-        <p>Industry-sponsored prizes throughout the night, including a grand prize draw.</p>
+      <div class="expect-num">03</div>
+      <div>
+        <div class="expect-item-title">Prizes &amp; Raffle Draws</div>
+        <div class="expect-item-desc">Industry-sponsored prizes drawn throughout the night, including three grand prizes worth $1,500+ each.</div>
       </div>
     </div>
     <div class="expect-item">
-      <div class="expect-icon">🤝</div>
-      <div class="expect-text">
-        <h4>Real Connections</h4>
-        <p>~150 retailers, budtenders, and partners — all in one room, no agenda required.</p>
+      <div class="expect-num">04</div>
+      <div>
+        <div class="expect-item-title">The People You Work With</div>
+        <div class="expect-item-desc">150+ retailers, budtenders, and partners in one room. No agenda. Just the industry getting together.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LINEUP -->
-<section class="lineup">
-  <div class="lineup-header">
-    <h2>The <em>Lineup</em></h2>
-    <p>Live entertainment all evening</p>
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="schedule-header">
+    <div class="eyebrow">How the Night Unfolds</div>
+    <h2 class="schedule-title">The <em>Schedule</em></h2>
   </div>
-  <div class="lineup-grid">
-    <div class="lineup-card">
-      <div class="lineup-icon">🎤</div>
-      <div class="lineup-type">Stand-Up Comedy</div>
-      <div class="lineup-name">Headlining Comedian</div>
-      <p class="lineup-desc">We've got a headlining comedian joining us for the evening. Name to be announced — laughs guaranteed.</p>
+  <div class="schedule-items">
+    <div class="schedule-block" data-time="4PM">
+      <div class="schedule-tag-row">
+        <span class="schedule-time-badge">1:00 – 4:00 PM</span>
+        <span class="schedule-period">Afternoon</span>
+      </div>
+      <div class="schedule-block-title">Meet the LPs</div>
+      <div class="schedule-block-desc">LPs set up across the venue to connect directly with Saskatchewan retailers and budtenders. Walk the floor, ask questions, get some face time with the brands you carry.</div>
+      <div class="schedule-chips">
+        <span class="chip">LP Showcase</span>
+        <span class="chip">Networking</span>
+      </div>
     </div>
-    <div class="lineup-card">
-      <div class="lineup-icon">🎧</div>
-      <div class="lineup-type">Music</div>
-      <div class="lineup-name">Live DJ Set</div>
-      <p class="lineup-desc">A live DJ spinning all night to set the vibe and keep the energy going from start to finish.</p>
-    </div>
-    <div class="lineup-card">
-      <div class="lineup-icon">🎨</div>
-      <div class="lineup-type">Live Art</div>
-      <div class="lineup-name">Caricature Artist</div>
-      <p class="lineup-desc">Get a live caricature done of yourself on the night — a one-of-a-kind keepsake to take home.</p>
+    <div class="schedule-block featured" data-time="PM">
+      <div class="schedule-tag-row">
+        <span class="schedule-time-badge">7:30 PM</span>
+        <span class="schedule-period">Evening</span>
+      </div>
+      <div class="schedule-block-title">The Main Event</div>
+      <div class="schedule-block-desc">Doors open, drinks flow, the DJ's on. Catch a comedian, get your caricature done, and stay for the raffle draws. No itinerary — just a good night out with the industry.</div>
+      <div class="schedule-chips">
+        <span class="chip">Food &amp; Drinks</span>
+        <span class="chip">Live Entertainment</span>
+        <span class="chip">Caricature Artist · FIGR</span>
+        <span class="chip">Raffle Draws</span>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- GALLERY -->
-<section class="gallery-section">
+<section class="gallery">
   <div class="gallery-header">
-    <h2>From Our Last Event</h2>
-    <p>A look back at SK Cannabis Connect 2025</p>
+    <h2 class="gallery-title">From Our <em>Last Event</em></h2>
+    <span class="gallery-note">SK Cannabis Connect 2025</span>
   </div>
   <div class="gallery-grid">
-    <div class="gallery-item"><img src="assets/photos/photo-01.jpg" alt="SK Cannabis Connect 2025"></div>
-    <div class="gallery-item"><img src="assets/photos/photo-02.jpg" alt="SK Cannabis Connect 2025"></div>
-    <div class="gallery-item"><img src="assets/photos/photo-03.jpg" alt="SK Cannabis Connect 2025"></div>
-    <div class="gallery-item"><img src="assets/photos/photo-04.jpg" alt="SK Cannabis Connect 2025"></div>
-    <div class="gallery-item"><img src="assets/photos/photo-05.jpg" alt="SK Cannabis Connect 2025"></div>
-    <div class="gallery-item"><img src="assets/photos/photo-06.jpg" alt="SK Cannabis Connect 2025"></div>
-    <div class="gallery-item"><img src="assets/photos/photo-07.jpg" alt="SK Cannabis Connect 2025"></div>
-    <div class="gallery-item"><img src="assets/photos/photo-08.jpg" alt="SK Cannabis Connect 2025"></div>
-    <div class="gallery-item"><img src="assets/photos/photo-09.jpg" alt="SK Cannabis Connect 2025"></div>
+    <div class="gallery-item"><div class="gallery-placeholder">Photo</div></div>
+    <div class="gallery-item"><div class="gallery-placeholder">Photo</div></div>
+    <div class="gallery-item"><div class="gallery-placeholder">Photo</div></div>
+    <div class="gallery-item"><div class="gallery-placeholder">Photo</div></div>
+    <div class="gallery-item"><div class="gallery-placeholder">Photo</div></div>
   </div>
 </section>
 
 <!-- RSVP -->
-<section class="form-section" id="rsvp">
-  <div class="form-intro">
-    <h2>Reserve<br>Your Spot</h2>
-    <p>Free to attend — registration required. Add your team members during sign-up.</p>
-    <div class="contact-block">
-      <div class="contact-block-label">Questions? Contact Ethan</div>
-      <a href="mailto:etonnies@openfields.ca">etonnies@openfields.ca</a>
-      <a href="tel:3067749485">306 774 9485</a>
+<section class="rsvp" id="rsvp">
+  <div class="rsvp-left">
+    <div>
+      <div class="eyebrow">Join Us</div>
+      <h2 class="rsvp-heading">Reserve<br>Your <em>Spot</em></h2>
+      <p class="rsvp-desc">
+        It's free. You just need to register so we know you're coming. You can add teammates during sign-up — the more the merrier, but spots are limited so don't sit on it.
+      </p>
+    </div>
+    <div class="rsvp-contact">
+      <div class="rsvp-contact-label">Got a question? Just reach out</div>
+      <div class="rsvp-contact-name">Ethan Tonnies</div>
+      <div class="rsvp-contact-info">orders@openfields.ca</div>
+      <div class="rsvp-contact-info">306-774-9485</div>
     </div>
   </div>
-
-  <div class="tf-wrap">
-    <!--
-      TYPEFORM EMBED — REPLACE THIS BLOCK
-      =====================================
-      1. Typeform → Share → Embed → Standard
-      2. Copy the snippet and paste it here
-      3. Delete this entire comment block
-
-      Example:
-      <div data-tf-live="YOUR_FORM_ID"></div>
-      <script src="//embed.typeform.com/next/embed.js"></script>
-    -->
-    <div class="tf-placeholder">
-      <div class="tf-icon">📋</div>
-      <h3>RSVP Form</h3>
-      <p>Paste your Typeform embed code here once the form is live — this placeholder will be replaced.</p>
-      <code>
-        &lt;div data-tf-live="YOUR_FORM_ID"&gt;&lt;/div&gt;<br>
-        &lt;script src="//embed.typeform.com/next/embed.js"&gt;&lt;/script&gt;
-      </code>
+  <div class="rsvp-right">
+    <div>
+      <div class="rsvp-card-eyebrow">Registration</div>
+      <div class="rsvp-card-title">Grab your spot at SK Cannabis Connect 2026</div>
+      <div class="rsvp-meta">
+        <div class="rsvp-meta-line">Date — <span>June 18, 2026</span></div>
+        <div class="rsvp-meta-line">Venue — <span>Studio 301, Saskatoon</span></div>
+        <div class="rsvp-meta-line">Admission — <span>Complimentary</span></div>
+      </div>
+      <div class="rsvp-form-embed">Typeform embed</div>
+      <a href="#" class="rsvp-btn">
+        Register Now
+        <span class="rsvp-btn-arrow">→</span>
+      </a>
+      <div class="rsvp-note">Spots fill up — register early</div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-left">
-    <div class="footer-brand">Open Fields Distribution</div>
-    <p>Presented by OFD · Saskatoon, Saskatchewan</p>
-  </div>
+  <div class="footer-left">Open Fields Distribution · SK Cannabis Connect 2026</div>
+  <div class="footer-center">Saskatchewan's Cannabis Community</div>
   <div class="footer-right">
-    <a href="mailto:etonnies@openfields.ca">etonnies@openfields.ca</a>
-    <a href="tel:3067749485">306 774 9485</a>
+    orders@openfields.ca · 306-774-9485
   </div>
 </footer>
 
