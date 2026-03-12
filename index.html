@@ -902,54 +902,6 @@ nav {
 }
 .rsvp-meta-line span { color: rgba(244,239,228,0.8); }
 
-.rsvp-form-embed {
-  background: rgba(244,239,228,0.04);
-  border: 1px dashed rgba(201,168,76,0.25);
-  padding: 4rem 2rem;
-  text-align: center;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  color: rgba(244,239,228,0.2);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-}
-
-.rsvp-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--gold);
-  color: var(--green);
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 1.1rem 1.5rem;
-  text-decoration: none;
-  transition: background 0.2s;
-  position: relative;
-  z-index: 2;
-}
-.rsvp-btn:hover { background: var(--gold-light); }
-
-.rsvp-btn-arrow {
-  font-size: 1rem;
-}
-
-.rsvp-note {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.58rem;
-  color: rgba(244,239,228,0.25);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: center;
-  margin-top: 0.75rem;
-  position: relative;
-  z-index: 2;
-}
-
 /* FOOTER */
 footer {
   background: var(--ink);
@@ -994,6 +946,50 @@ footer {
 .hero-pill { animation: fadeUp 0.5s ease 0.1s both; }
 .hero-title { animation: fadeUp 0.6s ease 0.2s both; }
 .hero-bottom { animation: fadeUp 0.6s ease 0.4s both; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-inner { padding: 0.75rem 1.25rem; }
+  .nav-links { gap: 1rem; }
+
+  .hero { padding: 0 1.5rem 3rem; }
+  .hero-date-stamp { right: 1.5rem; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .hero-actions { align-items: flex-start; }
+
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat { border-bottom: 1px solid var(--border); }
+
+  .sponsors { padding: 4rem 1.5rem; }
+  .sponsor-grid { grid-template-columns: 1fr; }
+
+  .expect { grid-template-columns: 1fr; }
+  .expect-left { border-right: none; border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; }
+  .expect-item { padding: 1.75rem 1.5rem; }
+
+  .schedule { padding: 4rem 1.5rem; }
+  .schedule-items { grid-template-columns: 1fr; }
+
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .gallery-item { border-bottom: 1px solid var(--border); }
+
+  .rsvp { grid-template-columns: 1fr; }
+  .rsvp-left { border-right: none; border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; }
+  .rsvp-right { padding: 4rem 1.5rem; }
+
+  footer { grid-template-columns: 1fr; gap: 0.75rem; text-align: center; }
+  .footer-right { text-align: center; }
+}
+
+@media (max-width: 540px) {
+  .nav-links .nav-link { display: none; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat-num { font-size: 2.75rem; }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .schedule-block { padding: 2rem 1.25rem; }
+  .rsvp-right::before { font-size: 8rem; }
+}
 </style>
 </head>
 <body>
@@ -1034,7 +1030,7 @@ footer {
         Reserve Your Spot
         <span class="arrow">→</span>
       </a>
-      <div class="hero-fine">Studio 301 · Free to attend · Registration required</div>
+      <div class="hero-fine">Studio 301 · 301 1st Ave N, Saskatoon SK S7K 1X5 · Free to attend · Registration required</div>
     </div>
   </div>
 </section>
@@ -1096,7 +1092,7 @@ footer {
   </div>
   <div class="sponsor-grid">
     <div class="sponsor-card">
-      <div class="sponsor-logo-box"><img src="assets/sponsors/logo-03.png" alt="BudNked"></div>
+      <div class="sponsor-logo-box"><img src="assets/sponsors/logo-03.png" alt="BudNked" onerror="this.replaceWith(document.createTextNode('BudNked'))"></div>
       <div class="sponsor-name">BudNked</div>
     </div>
     <div class="sponsor-card">
@@ -1267,7 +1263,7 @@ footer {
       <div class="rsvp-card-title">Grab your spot at SK Cannabis Connect 2026</div>
       <div class="rsvp-meta">
         <div class="rsvp-meta-line">Date — <span>June 18, 2026</span></div>
-        <div class="rsvp-meta-line">Venue — <span>Studio 301, Saskatoon</span></div>
+        <div class="rsvp-meta-line">Venue — <span>Studio 301, 301 1st Ave N, Saskatoon SK S7K 1X5</span></div>
         <div class="rsvp-meta-line">Admission — <span>Complimentary</span></div>
       </div>
       <div data-tf-live="01KKF7B3E2ZBY9781B8HMHPQX8"></div>
