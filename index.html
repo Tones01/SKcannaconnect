@@ -105,7 +105,10 @@ nav {
 /* HERO */
 .hero {
   min-height: 100vh;
-  background: var(--warm-white);
+  background: var(--green);
+  background-image: url('assets/hero/hero.jpg');
+  background-size: cover;
+  background-position: center top;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -113,6 +116,19 @@ nav {
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 28, 24, 0.72) 0%,
+    rgba(10, 28, 24, 0.88) 60%,
+    rgba(10, 28, 24, 0.95) 100%
+  );
+  z-index: 1;
 }
 
 /* Big decorative date stamp top right */
@@ -128,7 +144,7 @@ nav {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(6rem, 14vw, 12rem);
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(22,47,41,0.12);
+  -webkit-text-stroke: 1.5px rgba(244,239,228,0.18);
   line-height: 0.85;
   user-select: none;
 }
@@ -148,8 +164,9 @@ nav {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: var(--green);
-  color: var(--cream);
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.5);
+  color: var(--gold);
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
   letter-spacing: 0.15em;
@@ -157,6 +174,8 @@ nav {
   padding: 0.5rem 1rem;
   margin-bottom: 2.5rem;
   width: fit-content;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-pill::before {
@@ -170,7 +189,7 @@ nav {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(3.5rem, 8vw, 7.5rem);
   line-height: 0.95;
-  color: var(--ink);
+  color: var(--cream);
   max-width: 900px;
   margin-bottom: 3rem;
   position: relative;
@@ -178,7 +197,7 @@ nav {
 }
 
 .hero-title .accent {
-  color: var(--green);
+  color: #7ecdb8;
   font-style: italic;
 }
 
@@ -198,7 +217,7 @@ nav {
 .hero-desc {
   max-width: 420px;
   font-size: 0.95rem;
-  color: var(--muted);
+  color: rgba(244,239,228,0.78);
   line-height: 1.75;
   font-weight: 400;
 }
@@ -241,7 +260,7 @@ nav {
 .hero-fine {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
-  color: var(--muted);
+  color: rgba(244,239,228,0.5);
   letter-spacing: 0.08em;
   text-align: right;
 }
