@@ -111,8 +111,8 @@ nav {
   background-position: center top;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 3rem 4rem;
+  justify-content: space-between;
+  padding: 7rem 3rem 4rem;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
@@ -173,8 +173,15 @@ nav {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   padding: 0.5rem 1rem;
-  margin-bottom: 2.5rem;
   width: fit-content;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-lower {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
   position: relative;
   z-index: 2;
 }
@@ -211,9 +218,6 @@ nav {
   line-height: 0.95;
   color: var(--cream);
   max-width: 900px;
-  margin-bottom: 3rem;
-  position: relative;
-  z-index: 2;
 }
 
 .hero-title .accent {
@@ -230,8 +234,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  position: relative;
-  z-index: 2;
 }
 
 .hero-desc {
@@ -969,6 +971,21 @@ footer {
 }
 
 .footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-logo {
+  height: 28px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  opacity: 0.55;
+  filter: brightness(0) invert(1);
+}
+
+.footer-tagline {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
   letter-spacing: 0.12em;
@@ -1000,8 +1017,7 @@ footer {
 }
 
 .hero-pill { animation: fadeUp 0.5s ease 0.1s both; }
-.hero-title { animation: fadeUp 0.6s ease 0.2s both; }
-.hero-bottom { animation: fadeUp 0.6s ease 0.4s both; }
+.hero-lower { animation: fadeUp 0.6s ease 0.3s both; }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
@@ -1009,7 +1025,7 @@ footer {
   .nav-inner { padding: 0.75rem 1.25rem; }
   .nav-links { gap: 1rem; }
 
-  .hero { padding: 0 1.5rem 3rem; }
+  .hero { padding: 6rem 1.5rem 3rem; }
   .hero-date-stamp { right: 1.5rem; }
   .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
   .hero-actions { align-items: flex-start; }
@@ -1077,6 +1093,7 @@ footer {
     Open Fields Distribution
   </div>
 
+  <div class="hero-lower">
   <h1 class="hero-title">
     Saskatchewan's<br>
     Cannabis <span class="accent">Community</span><br>
@@ -1094,6 +1111,7 @@ footer {
       </a>
       <div class="hero-fine">Studio 301 · 301 1st Ave N, Saskatoon SK S7K 1X5 · Free to attend · Registration required</div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -1357,7 +1375,10 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-left">Open Fields Distribution · SK Cannabis Connect 2026</div>
+  <div class="footer-left">
+    <img src="assets/open-fields-logo.png" alt="Open Fields Distribution" class="footer-logo" onerror="this.style.display='none'">
+    <span class="footer-tagline">Open Fields Distribution · SK Cannabis Connect 2026</span>
+  </div>
   <div class="footer-center">Saskatchewan's Cannabis Community</div>
   <div class="footer-right">
     orders@openfields.ca · 306-774-9485
