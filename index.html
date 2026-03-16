@@ -781,11 +781,28 @@ nav {
   border-right: 1px solid var(--border);
   transition: background 0.2s, color 0.2s;
   cursor: default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lp-name:hover {
   background: var(--green);
   color: var(--cream);
+}
+
+.lp-name img {
+  height: 36px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+  filter: none;
+  transition: filter 0.2s;
+}
+
+.lp-name:hover img {
+  filter: brightness(0) invert(1);
 }
 
 .lp-dot {
@@ -1132,45 +1149,45 @@ footer {
     <div class="lp-marquee-label">LP Showcase · Afternoon Mixer</div>
     <div class="lp-track-wrap">
       <div class="lp-track">
-        <span class="lp-name">Tilray</span>
-        <span class="lp-name">Organigram</span>
-        <span class="lp-name">Auxly</span>
-        <span class="lp-name">Decibel Cannabis Company</span>
-        <span class="lp-name">Pure SunFarms</span>
-        <span class="lp-name">Weed Me</span>
-        <span class="lp-name">BudNked</span>
-        <span class="lp-name">SNDL</span>
-        <span class="lp-name">Space Race Cannabis</span>
-        <span class="lp-name">Heritage</span>
-        <span class="lp-name">Canopy Growth</span>
-        <span class="lp-name">CannaPiece</span>
-        <span class="lp-name">5 Points Cannabis</span>
-        <span class="lp-name">Hybrid Infusions</span>
-        <span class="lp-name">Canada's Island Garden</span>
-        <span class="lp-name">Prarie Craft</span>
-        <span class="lp-name">Herba Farms</span>
-        <span class="lp-name">Dom Jackson</span>
-        <span class="lp-name">Rubicon</span>
+        <span class="lp-name"><img src="assets/lp-logos/tilray.png" alt="Tilray" onerror="this.replaceWith(document.createTextNode('Tilray'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/organigram.png" alt="Organigram" onerror="this.replaceWith(document.createTextNode('Organigram'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/auxly.png" alt="Auxly" onerror="this.replaceWith(document.createTextNode('Auxly'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/decibel.png" alt="Decibel Cannabis Company" onerror="this.replaceWith(document.createTextNode('Decibel Cannabis Company'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/pure-sunfarms.png" alt="Pure SunFarms" onerror="this.replaceWith(document.createTextNode('Pure SunFarms'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/weed-me.png" alt="Weed Me" onerror="this.replaceWith(document.createTextNode('Weed Me'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/budnked.png" alt="BudNked" onerror="this.replaceWith(document.createTextNode('BudNked'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/sndl.png" alt="SNDL" onerror="this.replaceWith(document.createTextNode('SNDL'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/space-race.png" alt="Space Race Cannabis" onerror="this.replaceWith(document.createTextNode('Space Race Cannabis'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/heritage.png" alt="Heritage" onerror="this.replaceWith(document.createTextNode('Heritage'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/canopy-growth.png" alt="Canopy Growth" onerror="this.replaceWith(document.createTextNode('Canopy Growth'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/cannapiece.png" alt="CannaPiece" onerror="this.replaceWith(document.createTextNode('CannaPiece'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/5-points.png" alt="5 Points Cannabis" onerror="this.replaceWith(document.createTextNode('5 Points Cannabis'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/hybrid-infusions.png" alt="Hybrid Infusions" onerror="this.replaceWith(document.createTextNode('Hybrid Infusions'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/canadas-island-garden.png" alt="Canada's Island Garden" onerror="this.replaceWith(document.createTextNode(&quot;Canada's Island Garden&quot;))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/prairie-craft.png" alt="Prairie Craft" onerror="this.replaceWith(document.createTextNode('Prairie Craft'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/herba-farms.png" alt="Herba Farms" onerror="this.replaceWith(document.createTextNode('Herba Farms'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/dom-jackson.png" alt="Dom Jackson" onerror="this.replaceWith(document.createTextNode('Dom Jackson'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/rubicon.png" alt="Rubicon" onerror="this.replaceWith(document.createTextNode('Rubicon'))"></span>
         <!-- duplicate for seamless loop -->
-        <span class="lp-name">Tilray</span>
-        <span class="lp-name">Organigram</span>
-        <span class="lp-name">Auxly</span>
-        <span class="lp-name">Decibel Cannabis Company</span>
-        <span class="lp-name">Pure SunFarms</span>
-        <span class="lp-name">Weed Me</span>
-        <span class="lp-name">BudNked</span>
-        <span class="lp-name">SNDL</span>
-        <span class="lp-name">Space Race Cannabis</span>
-        <span class="lp-name">Heritage</span>
-        <span class="lp-name">Canopy Growth</span>
-        <span class="lp-name">CannaPiece</span>
-        <span class="lp-name">5 Points Cannabis</span>
-        <span class="lp-name">Hybrid Infusions</span>
-        <span class="lp-name">Canada's Island Garden</span>
-        <span class="lp-name">Prarie Craft</span>
-        <span class="lp-name">Herba Farms</span>
-        <span class="lp-name">Dom Jackson</span>
-        <span class="lp-name">Rubicon</span>
+        <span class="lp-name"><img src="assets/lp-logos/tilray.png" alt="Tilray" onerror="this.replaceWith(document.createTextNode('Tilray'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/organigram.png" alt="Organigram" onerror="this.replaceWith(document.createTextNode('Organigram'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/auxly.png" alt="Auxly" onerror="this.replaceWith(document.createTextNode('Auxly'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/decibel.png" alt="Decibel Cannabis Company" onerror="this.replaceWith(document.createTextNode('Decibel Cannabis Company'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/pure-sunfarms.png" alt="Pure SunFarms" onerror="this.replaceWith(document.createTextNode('Pure SunFarms'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/weed-me.png" alt="Weed Me" onerror="this.replaceWith(document.createTextNode('Weed Me'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/budnked.png" alt="BudNked" onerror="this.replaceWith(document.createTextNode('BudNked'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/sndl.png" alt="SNDL" onerror="this.replaceWith(document.createTextNode('SNDL'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/space-race.png" alt="Space Race Cannabis" onerror="this.replaceWith(document.createTextNode('Space Race Cannabis'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/heritage.png" alt="Heritage" onerror="this.replaceWith(document.createTextNode('Heritage'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/canopy-growth.png" alt="Canopy Growth" onerror="this.replaceWith(document.createTextNode('Canopy Growth'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/cannapiece.png" alt="CannaPiece" onerror="this.replaceWith(document.createTextNode('CannaPiece'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/5-points.png" alt="5 Points Cannabis" onerror="this.replaceWith(document.createTextNode('5 Points Cannabis'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/hybrid-infusions.png" alt="Hybrid Infusions" onerror="this.replaceWith(document.createTextNode('Hybrid Infusions'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/canadas-island-garden.png" alt="Canada's Island Garden" onerror="this.replaceWith(document.createTextNode(&quot;Canada's Island Garden&quot;))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/prairie-craft.png" alt="Prairie Craft" onerror="this.replaceWith(document.createTextNode('Prairie Craft'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/herba-farms.png" alt="Herba Farms" onerror="this.replaceWith(document.createTextNode('Herba Farms'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/dom-jackson.png" alt="Dom Jackson" onerror="this.replaceWith(document.createTextNode('Dom Jackson'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/rubicon.png" alt="Rubicon" onerror="this.replaceWith(document.createTextNode('Rubicon'))"></span>
       </div>
     </div>
   </div>
