@@ -112,7 +112,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 7rem 3rem 4rem;
+  padding: 9rem 3rem 4rem;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
@@ -163,16 +163,13 @@ nav {
 /* Green accent pill */
 .hero-pill {
   display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: rgba(201,168,76,0.15);
-  border: 1px solid rgba(201,168,76,0.5);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.35);
   color: var(--gold);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 0.5rem 1rem;
+  padding: 0.65rem 1rem;
   width: fit-content;
   position: relative;
   z-index: 2;
@@ -186,29 +183,26 @@ nav {
   z-index: 2;
 }
 
-.hero-pill::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-}
+.hero-pill::before { display: none; }
 
 .hero-pill-label {
-  font-size: 0.55rem;
-  opacity: 0.7;
-  letter-spacing: 0.12em;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.6;
 }
 
 .hero-pill-logo {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  height: 18px;
+  height: 22px;
 }
 
 .hero-pill-logo img {
-  height: 18px;
+  height: 22px;
   width: auto;
-  max-width: 80px;
+  max-width: 120px;
   object-fit: contain;
 }
 
@@ -1025,7 +1019,7 @@ footer {
   .nav-inner { padding: 0.75rem 1.25rem; }
   .nav-links { gap: 1rem; }
 
-  .hero { padding: 6rem 1.5rem 3rem; }
+  .hero { padding: 8rem 1.5rem 3rem; }
   .hero-date-stamp { right: 1.5rem; }
   .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
   .hero-actions { align-items: flex-start; }
@@ -1090,7 +1084,6 @@ footer {
     <span class="hero-pill-logo">
       <img src="assets/open-fields-logo.png" alt="Open Fields Distribution" onerror="this.style.display='none'">
     </span>
-    Open Fields Distribution
   </div>
 
   <div class="hero-lower">
