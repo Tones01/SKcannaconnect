@@ -282,36 +282,65 @@ nav {
   text-align: right;
 }
 
-/* TICKER STRIP */
-.ticker {
-  background: var(--green);
-  padding: 0.85rem 0;
-  overflow: hidden;
-  white-space: nowrap;
+
+/* CARICATURE SPONSOR */
+.caricature-sponsor {
+  padding: 3.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
-.ticker-inner {
-  display: inline-flex;
-  gap: 0;
-  animation: ticker 30s linear infinite;
-}
-
-.ticker-item {
+.caricature-sponsor-logo-box {
+  width: 14rem;
+  height: 7rem;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(244,239,228,0.5);
-  padding: 0 2rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
 }
 
-.ticker-item.highlight {
-  color: var(--gold);
+.caricature-sponsor-logo-box img {
+  max-width: 80%;
+  max-height: 70%;
+  object-fit: contain;
 }
 
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.caricature-sponsor-text {
+  flex: 1;
+  min-width: 16rem;
+}
+
+.caricature-sponsor-text .eyebrow {
+  margin-bottom: 0.5rem;
+}
+
+.caricature-sponsor-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+
+.caricature-sponsor-title em {
+  font-style: italic;
+  color: var(--green);
+}
+
+.caricature-sponsor-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 36rem;
 }
 
 /* STATS */
@@ -1109,24 +1138,6 @@ footer {
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item highlight">June 18, 2026</span>
-    <span class="ticker-item">Studio 301 · Saskatoon</span>
-    <span class="ticker-item">Live DJ</span>
-    <span class="ticker-item">Caricature Artist</span>
-    <span class="ticker-item">150+ Industry Guests</span>
-    <span class="ticker-item">Open Fields Distribution</span>
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item highlight">June 18, 2026</span>
-    <span class="ticker-item">Studio 301 · Saskatoon</span>
-    <span class="ticker-item">Live DJ</span>
-    <span class="ticker-item">Caricature Artist</span>
-    <span class="ticker-item">150+ Industry Guests</span>
-    <span class="ticker-item">Open Fields Distribution</span>
-  </div>
-</div>
 
 <!-- STATS -->
 <section class="stats">
@@ -1169,6 +1180,18 @@ footer {
       <div class="sponsor-logo-box"><img src="assets/sponsors/logo-01.png" alt="Herba Farms"></div>
       <div class="sponsor-name">Herba Farms</div>
     </div>
+  </div>
+</section>
+
+<!-- CARICATURE SPONSOR -->
+<section class="caricature-sponsor">
+  <div class="caricature-sponsor-logo-box">
+    <img src="assets/sponsors/figr-logo.png" alt="FIGR" onerror="this.parentElement.innerHTML='FIGR'">
+  </div>
+  <div class="caricature-sponsor-text">
+    <div class="eyebrow">Caricature Sponsor</div>
+    <h3 class="caricature-sponsor-title">Caricature Artist<br><em>Brought to You by FIGR</em></h3>
+    <p class="caricature-sponsor-desc">FIGR is proudly sponsoring the caricature artist at this year's event. Get your portrait done — on them.</p>
   </div>
 </section>
 
@@ -1243,7 +1266,7 @@ footer {
       <div class="expect-num">02</div>
       <div>
         <div class="expect-item-title">Live Entertainment</div>
-        <div class="expect-item-desc">Live DJ, Sterling Scott on stage, and a caricature artist courtesy of Canada's Island Garden. It's a good night.</div>
+        <div class="expect-item-desc">Live DJ, Sterling Scott on stage, and a caricature artist courtesy of FIGR. It's a good night.</div>
       </div>
     </div>
     <div class="expect-item">
@@ -1300,7 +1323,7 @@ footer {
       <div class="schedule-chips">
         <span class="chip">Food &amp; Drinks</span>
         <span class="chip">Live Entertainment</span>
-        <span class="chip">Caricature Artist · Canada's Island Garden</span>
+        <span class="chip">Caricature Artist · FIGR</span>
         <span class="chip">Raffle Draws</span>
         <span class="chip">LP Showcase</span>
       </div>
@@ -1339,9 +1362,7 @@ footer {
     </div>
     <div class="rsvp-contact">
       <div class="rsvp-contact-label">Got a question? Just reach out</div>
-      <div class="rsvp-contact-name">Ethan Tonnies</div>
       <div class="rsvp-contact-info">orders@openfields.ca</div>
-      <div class="rsvp-contact-info">306-774-9485</div>
     </div>
   </div>
   <div class="rsvp-right">
