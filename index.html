@@ -22,6 +22,14 @@
 
 html { scroll-behavior: smooth; font-size: 125%; }
 
+@media (max-width: 900px) {
+  html { font-size: 100%; }
+}
+
+@media (max-width: 540px) {
+  html { font-size: 87.5%; }
+}
+
 body {
   font-family: 'Syne', sans-serif;
   background: var(--warm-white);
@@ -197,13 +205,13 @@ nav {
 .hero-pill-logo {
   display: flex;
   align-items: center;
-  height: 7.5rem;
+  height: 5rem;
 }
 
 .hero-pill-logo img {
-  height: 7.5rem;
+  height: 5rem;
   width: auto;
-  max-width: 360px;
+  max-width: 280px;
   object-fit: contain;
 }
 
@@ -301,7 +309,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  flex-shrink: 1;
   font-family: 'DM Mono', monospace;
   font-size: 1.1rem;
   letter-spacing: 0.1em;
@@ -1079,12 +1087,42 @@ footer {
 }
 
 @media (max-width: 540px) {
+  nav { padding: 0.75rem 1rem; }
   .nav-links .nav-link { display: none; }
+
+  .hero { padding: 6rem 1.25rem 2.5rem; }
+  .hero-date-stamp { display: none; }
+  .hero-pill-logo,
+  .hero-pill-logo img { height: 3.5rem; }
+  .hero-lower { gap: 1.5rem; margin-top: 1.5rem; }
+  .hero-bottom { gap: 1.5rem; }
+
   .stats { grid-template-columns: 1fr 1fr; }
+  .stat { padding: 2rem 1.25rem; }
   .stat-num { font-size: 2.75rem; }
-  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .caricature-sponsor { padding: 2rem 1.25rem; gap: 1.5rem; }
+  .caricature-sponsor-logo-box { width: 100%; height: 5rem; }
+  .caricature-sponsor-text { min-width: unset; }
+
+  .sponsors { padding: 3rem 1.25rem; }
+  .sponsor-card { padding: 2rem 1.5rem; }
+
+  .expect-left { padding: 3rem 1.25rem; }
+  .expect-item { padding: 1.25rem 1.25rem; }
+
+  .schedule { padding: 3rem 1.25rem; }
+  .schedule-header { margin-bottom: 2rem; }
   .schedule-block { padding: 2rem 1.25rem; }
-  .rsvp-right::before { font-size: 6.4rem; }
+
+  .gallery-header { padding: 2.5rem 1.25rem 1.5rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .rsvp-left { padding: 3rem 1.25rem; }
+  .rsvp-right { padding: 3rem 1.25rem; }
+  .rsvp-right::before { font-size: 5rem; }
+
+  footer { padding: 2rem 1.25rem; }
 }
 </style>
 </head>
