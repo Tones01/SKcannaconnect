@@ -20,7 +20,15 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 125%; }
+
+@media (max-width: 900px) {
+  html { font-size: 100%; }
+}
+
+@media (max-width: 540px) {
+  html { font-size: 87.5%; }
+}
 
 body {
   font-family: 'Syne', sans-serif;
@@ -105,14 +113,31 @@ nav {
 /* HERO */
 .hero {
   min-height: 100vh;
-  background: var(--warm-white);
+  background: var(--green);
+  background-image: url('assets/hero/hero.jpg');
+  background-size: cover;
+  background-position: center top;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 3rem 4rem;
+  justify-content: space-between;
+  padding: 9rem 3rem 4rem;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 28, 24, 0.52) 0%,
+    rgba(10, 28, 24, 0.68) 60%,
+    rgba(10, 28, 24, 0.80) 100%
+  );
+  z-index: 1;
 }
 
 /* Big decorative date stamp top right */
@@ -128,7 +153,7 @@ nav {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(6rem, 14vw, 12rem);
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(22,47,41,0.12);
+  -webkit-text-stroke: 1.5px rgba(244,239,228,0.18);
   line-height: 0.85;
   user-select: none;
 }
@@ -146,39 +171,60 @@ nav {
 /* Green accent pill */
 .hero-pill {
   display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--green);
-  color: var(--cream);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 0.5rem 1rem;
-  margin-bottom: 2.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold);
+  padding: 0.65rem 1rem;
   width: fit-content;
+  position: relative;
+  z-index: 2;
 }
 
-.hero-pill::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
+.hero-lower {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-pill::before { display: none; }
+
+.hero-pill-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.hero-pill-logo {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+}
+
+.hero-pill-logo img {
+  height: 5rem;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
 }
 
 .hero-title {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(3.5rem, 8vw, 7.5rem);
   line-height: 0.95;
-  color: var(--ink);
+  color: var(--cream);
   max-width: 900px;
-  margin-bottom: 3rem;
-  position: relative;
-  z-index: 2;
 }
 
 .hero-title .accent {
-  color: var(--green);
+  color: #7ecdb8;
   font-style: italic;
 }
 
@@ -191,14 +237,12 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  position: relative;
-  z-index: 2;
 }
 
 .hero-desc {
   max-width: 420px;
   font-size: 0.95rem;
-  color: var(--muted);
+  color: rgba(244,239,228,0.78);
   line-height: 1.75;
   font-weight: 400;
 }
@@ -241,41 +285,70 @@ nav {
 .hero-fine {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
-  color: var(--muted);
+  color: rgba(244,239,228,0.5);
   letter-spacing: 0.08em;
   text-align: right;
 }
 
-/* TICKER STRIP */
-.ticker {
-  background: var(--green);
-  padding: 0.85rem 0;
-  overflow: hidden;
-  white-space: nowrap;
+
+/* CARICATURE SPONSOR */
+.caricature-sponsor {
+  padding: 3.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
-.ticker-inner {
-  display: inline-flex;
-  gap: 0;
-  animation: ticker 30s linear infinite;
-}
-
-.ticker-item {
+.caricature-sponsor-logo-box {
+  width: 14rem;
+  height: 7rem;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 1;
   font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(244,239,228,0.5);
-  padding: 0 2rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
 }
 
-.ticker-item.highlight {
-  color: var(--gold);
+.caricature-sponsor-logo-box img {
+  max-width: 80%;
+  max-height: 70%;
+  object-fit: contain;
 }
 
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.caricature-sponsor-text {
+  flex: 1;
+  min-width: 16rem;
+}
+
+.caricature-sponsor-text .eyebrow {
+  margin-bottom: 0.5rem;
+}
+
+.caricature-sponsor-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+
+.caricature-sponsor-title em {
+  font-style: italic;
+  color: var(--green);
+}
+
+.caricature-sponsor-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 36rem;
 }
 
 /* STATS */
@@ -393,7 +466,7 @@ nav {
 
 .sponsor-logo-box {
   width: 100%;
-  height: 70px;
+  height: 9.375rem;
   background: var(--paper);
   display: flex;
   align-items: center;
@@ -408,7 +481,7 @@ nav {
 
 .sponsor-logo-box img {
   max-width: 100%;
-  max-height: 60px;
+  max-height: 8.125rem;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -443,7 +516,7 @@ nav {
   bottom: -2rem;
   right: -1rem;
   font-family: 'Instrument Serif', serif;
-  font-size: 9rem;
+  font-size: 7.2rem;
   line-height: 0.85;
   color: transparent;
   -webkit-text-stroke: 1px rgba(244,239,228,0.07);
@@ -560,7 +633,7 @@ nav {
   position: absolute;
   bottom: 1.5rem; right: 2rem;
   font-family: 'Instrument Serif', serif;
-  font-size: 5rem;
+  font-size: 4rem;
   color: transparent;
   -webkit-text-stroke: 1px rgba(26,26,24,0.05);
   line-height: 1;
@@ -761,11 +834,28 @@ nav {
   border-right: 1px solid var(--border);
   transition: background 0.2s, color 0.2s;
   cursor: default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lp-name:hover {
   background: var(--green);
   color: var(--cream);
+}
+
+.lp-name img {
+  height: 2.25rem;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+  filter: none;
+  transition: filter 0.2s;
+}
+
+.lp-name:hover img {
+  filter: brightness(0) invert(1);
 }
 
 .lp-dot {
@@ -860,7 +950,7 @@ nav {
   position: absolute;
   bottom: -2rem; right: -1rem;
   font-family: 'Instrument Serif', serif;
-  font-size: 14rem;
+  font-size: 11.2rem;
   color: transparent;
   -webkit-text-stroke: 1px rgba(244,239,228,0.05);
   line-height: 1;
@@ -902,54 +992,6 @@ nav {
 }
 .rsvp-meta-line span { color: rgba(244,239,228,0.8); }
 
-.rsvp-form-embed {
-  background: rgba(244,239,228,0.04);
-  border: 1px dashed rgba(201,168,76,0.25);
-  padding: 4rem 2rem;
-  text-align: center;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  color: rgba(244,239,228,0.2);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-}
-
-.rsvp-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--gold);
-  color: var(--green);
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 1.1rem 1.5rem;
-  text-decoration: none;
-  transition: background 0.2s;
-  position: relative;
-  z-index: 2;
-}
-.rsvp-btn:hover { background: var(--gold-light); }
-
-.rsvp-btn-arrow {
-  font-size: 1rem;
-}
-
-.rsvp-note {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.58rem;
-  color: rgba(244,239,228,0.25);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: center;
-  margin-top: 0.75rem;
-  position: relative;
-  z-index: 2;
-}
-
 /* FOOTER */
 footer {
   background: var(--ink);
@@ -961,6 +1003,21 @@ footer {
 }
 
 .footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-logo {
+  height: 1.75rem;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  opacity: 0.55;
+  filter: brightness(0) invert(1);
+}
+
+.footer-tagline {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
   letter-spacing: 0.12em;
@@ -992,8 +1049,81 @@ footer {
 }
 
 .hero-pill { animation: fadeUp 0.5s ease 0.1s both; }
-.hero-title { animation: fadeUp 0.6s ease 0.2s both; }
-.hero-bottom { animation: fadeUp 0.6s ease 0.4s both; }
+.hero-lower { animation: fadeUp 0.6s ease 0.3s both; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-inner { padding: 0.75rem 1.25rem; }
+  .nav-links { gap: 1rem; }
+
+  .hero { padding: 8rem 1.5rem 3rem; }
+  .hero-date-stamp { right: 1.5rem; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .hero-actions { align-items: flex-start; }
+
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat { border-bottom: 1px solid var(--border); }
+
+  .sponsors { padding: 4rem 1.5rem; }
+  .sponsor-grid { grid-template-columns: 1fr; }
+
+  .expect { grid-template-columns: 1fr; }
+  .expect-left { border-right: none; border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; }
+  .expect-item { padding: 1.75rem 1.5rem; }
+
+  .schedule { padding: 4rem 1.5rem; }
+  .schedule-items { grid-template-columns: 1fr; }
+
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .gallery-item { border-bottom: 1px solid var(--border); }
+
+  .rsvp { grid-template-columns: 1fr; }
+  .rsvp-left { border-right: none; border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; }
+  .rsvp-right { padding: 4rem 1.5rem; }
+
+  footer { grid-template-columns: 1fr; gap: 0.75rem; text-align: center; }
+  .footer-right { text-align: center; }
+}
+
+@media (max-width: 540px) {
+  nav { padding: 0.75rem 1rem; }
+  .nav-links .nav-link { display: none; }
+
+  .hero { padding: 6rem 1.25rem 2.5rem; }
+  .hero-date-stamp { display: none; }
+  .hero-pill-logo,
+  .hero-pill-logo img { height: 3.5rem; }
+  .hero-lower { gap: 1.5rem; margin-top: 1.5rem; }
+  .hero-bottom { gap: 1.5rem; }
+
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat { padding: 2rem 1.25rem; }
+  .stat-num { font-size: 2.75rem; }
+
+  .caricature-sponsor { padding: 2rem 1.25rem; gap: 1.5rem; }
+  .caricature-sponsor-logo-box { width: 100%; height: 5rem; }
+  .caricature-sponsor-text { min-width: unset; }
+
+  .sponsors { padding: 3rem 1.25rem; }
+  .sponsor-card { padding: 2rem 1.5rem; }
+
+  .expect-left { padding: 3rem 1.25rem; }
+  .expect-item { padding: 1.25rem 1.25rem; }
+
+  .schedule { padding: 3rem 1.25rem; }
+  .schedule-header { margin-bottom: 2rem; }
+  .schedule-block { padding: 2rem 1.25rem; }
+
+  .gallery-header { padding: 2.5rem 1.25rem 1.5rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .rsvp-left { padding: 3rem 1.25rem; }
+  .rsvp-right { padding: 3rem 1.25rem; }
+  .rsvp-right::before { font-size: 5rem; }
+
+  footer { padding: 2rem 1.25rem; }
+}
 </style>
 </head>
 <body>
@@ -1017,8 +1147,14 @@ footer {
     <div class="stamp-month">June · Saskatoon</div>
   </div>
 
-  <div class="hero-pill">Presented by Open Fields Distribution</div>
+  <div class="hero-pill">
+    <span class="hero-pill-label">Presented by</span>
+    <span class="hero-pill-logo">
+      <img src="assets/open-fields-logo.png" alt="Open Fields Distribution" onerror="this.style.display='none'">
+    </span>
+  </div>
 
+  <div class="hero-lower">
   <h1 class="hero-title">
     Saskatchewan's<br>
     Cannabis <span class="accent">Community</span><br>
@@ -1027,58 +1163,33 @@ footer {
 
   <div class="hero-bottom">
     <p class="hero-desc">
-      Every year, we get the Saskatchewan cannabis industry together for a night that has nothing to do with work. Good food, good drinks, good people. That's it.
+      Every year, we get the Saskatchewan cannabis industry together for a full day. An afternoon LP Showcase for retailers and buyers, followed by a night that has nothing to do with work. Good food, good drinks, good people. That's it. Must be 19+ to attend.
     </p>
     <div class="hero-actions">
       <a href="#rsvp" class="hero-btn">
         Reserve Your Spot
         <span class="arrow">→</span>
       </a>
-      <div class="hero-fine">Studio 301 · Free to attend · Registration required</div>
+      <div class="hero-fine">Studio 301 · 301 1st Ave N, Saskatoon SK S7K 1X5 · Free to attend · Registration required</div>
     </div>
+  </div>
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item highlight">June 18, 2026</span>
-    <span class="ticker-item">Studio 301 · Saskatoon</span>
-    <span class="ticker-item highlight">Free to Attend</span>
-    <span class="ticker-item">Live DJ</span>
-    <span class="ticker-item highlight">Stand-Up Comedy</span>
-    <span class="ticker-item">Caricature Artist</span>
-    <span class="ticker-item highlight">Grand Prize Draws</span>
-    <span class="ticker-item">150+ Industry Guests</span>
-    <span class="ticker-item highlight">No Pitches. No Agenda.</span>
-    <span class="ticker-item">Open Fields Distribution</span>
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item highlight">June 18, 2026</span>
-    <span class="ticker-item">Studio 301 · Saskatoon</span>
-    <span class="ticker-item highlight">Free to Attend</span>
-    <span class="ticker-item">Live DJ</span>
-    <span class="ticker-item highlight">Stand-Up Comedy</span>
-    <span class="ticker-item">Caricature Artist</span>
-    <span class="ticker-item highlight">Grand Prize Draws</span>
-    <span class="ticker-item">150+ Industry Guests</span>
-    <span class="ticker-item highlight">No Pitches. No Agenda.</span>
-    <span class="ticker-item">Open Fields Distribution</span>
-  </div>
-</div>
 
 <!-- STATS -->
 <section class="stats">
   <div class="stat">
-    <div class="stat-num">150</div>
-    <div class="stat-label">People from across the Saskatchewan cannabis industry</div>
+    <div class="stat-num">20+</div>
+    <div class="stat-label">Licensed Producers at the LP Showcase</div>
   </div>
   <div class="stat">
-    <div class="stat-num">100+</div>
-    <div class="stat-label">Retailers and budtenders in the room</div>
+    <div class="stat-num">3</div>
+    <div class="stat-label">Grand prizes up for grabs — worth $1,500+ each</div>
   </div>
   <div class="stat">
     <div class="stat-num">1</div>
-    <div class="stat-label">Night with no agenda, no booths, no pitches</div>
+    <div class="stat-label">One night, no agenda, no pitches, no pressure.</div>
   </div>
   <div class="stat">
     <div class="stat-num">0</div>
@@ -1096,7 +1207,7 @@ footer {
   </div>
   <div class="sponsor-grid">
     <div class="sponsor-card">
-      <div class="sponsor-logo-box"><img src="assets/sponsors/logo-03.png" alt="BudNked"></div>
+      <div class="sponsor-logo-box"><img src="assets/sponsors/logo-03.png" alt="BudNked" onerror="this.replaceWith(document.createTextNode('BudNked'))"></div>
       <div class="sponsor-name">BudNked</div>
     </div>
     <div class="sponsor-card">
@@ -1110,39 +1221,69 @@ footer {
   </div>
 </section>
 
+<!-- CARICATURE SPONSOR -->
+<section class="caricature-sponsor">
+  <div class="caricature-sponsor-logo-box">
+    <img src="assets/sponsors/figr-logo.png" alt="FIGR" onerror="this.parentElement.innerHTML='FIGR'">
+  </div>
+  <div class="caricature-sponsor-text">
+    <div class="eyebrow">Caricature Sponsor</div>
+    <h3 class="caricature-sponsor-title">Caricature Artist<br><em>Brought to You by FIGR</em></h3>
+    <p class="caricature-sponsor-desc">FIGR is proudly sponsoring the caricature artist at this year's event. Get your portrait done — on them.</p>
+  </div>
+</section>
+
 <!-- LP MARQUEE -->
 <div class="lp-marquee">
   <div class="lp-marquee-header">
     <div class="lp-marquee-label">LP Showcase · Afternoon Mixer</div>
     <div class="lp-track-wrap">
       <div class="lp-track">
-        <span class="lp-name">Auxly Cannabis</span>
-        <span class="lp-name">FIGR</span>
-        <span class="lp-name">Pure Sunfarms</span>
-        <span class="lp-name">Redecan</span>
-        <span class="lp-name">Spinach</span>
-        <span class="lp-name">Broken Coast</span>
-        <span class="lp-name">Deciem Cannabis</span>
-        <span class="lp-name">Kolab Project</span>
-        <span class="lp-name">Wana Brands</span>
-        <span class="lp-name">Versus Cannabis</span>
-        <span class="lp-name">Houseplant</span>
-        <span class="lp-name">LP Placeholder</span>
-        <span class="lp-name">LP Placeholder</span>
+        <span class="lp-name"><img src="assets/lp-logos/tilray.png" alt="Tilray" onerror="this.replaceWith(document.createTextNode('Tilray'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/organigram.png" alt="Organigram" onerror="this.replaceWith(document.createTextNode('Organigram'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/auxly.png" alt="Auxly" onerror="this.replaceWith(document.createTextNode('Auxly'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/decibel.png" alt="Decibel Cannabis Company" onerror="this.replaceWith(document.createTextNode('Decibel Cannabis Company'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/pure-sunfarms.png" alt="Pure SunFarms" onerror="this.replaceWith(document.createTextNode('Pure SunFarms'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/weed-me.png" alt="Weed Me" onerror="this.replaceWith(document.createTextNode('Weed Me'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/budnked.png" alt="BudNked" onerror="this.replaceWith(document.createTextNode('BudNked'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/sndl.png" alt="SNDL" onerror="this.replaceWith(document.createTextNode('SNDL'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/space-race.png" alt="Space Race Cannabis" onerror="this.replaceWith(document.createTextNode('Space Race Cannabis'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/heritage.png" alt="Heritage" onerror="this.replaceWith(document.createTextNode('Heritage'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/canopy-growth.png" alt="Canopy Growth" onerror="this.replaceWith(document.createTextNode('Canopy Growth'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/cannapiece.png" alt="CannaPiece" onerror="this.replaceWith(document.createTextNode('CannaPiece'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/5-points.png" alt="5 Points Cannabis" onerror="this.replaceWith(document.createTextNode('5 Points Cannabis'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/hybrid-infusions.png" alt="Hybrid Infusions" onerror="this.replaceWith(document.createTextNode('Hybrid Infusions'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/canadas-island-garden.png" alt="Canada's Island Garden" onerror="this.replaceWith(document.createTextNode(&quot;Canada's Island Garden&quot;))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/prairie-craft.png" alt="Prairie Craft" onerror="this.replaceWith(document.createTextNode('Prairie Craft'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/herba-farms.png" alt="Herba Farms" onerror="this.replaceWith(document.createTextNode('Herba Farms'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/dom-jackson.png" alt="Dom Jackson" onerror="this.replaceWith(document.createTextNode('Dom Jackson'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/rubicon.png" alt="Rubicon" onerror="this.replaceWith(document.createTextNode('Rubicon'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/cannara.png" alt="Cannara" onerror="this.replaceWith(document.createTextNode('Cannara'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/olli.png" alt="Olli" onerror="this.replaceWith(document.createTextNode('Olli'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/sticky-greens.png" alt="Sticky Greens" onerror="this.replaceWith(document.createTextNode('Sticky Greens'))"></span>
         <!-- duplicate for seamless loop -->
-        <span class="lp-name">Auxly Cannabis</span>
-        <span class="lp-name">FIGR</span>
-        <span class="lp-name">Pure Sunfarms</span>
-        <span class="lp-name">Redecan</span>
-        <span class="lp-name">Spinach</span>
-        <span class="lp-name">Broken Coast</span>
-        <span class="lp-name">Deciem Cannabis</span>
-        <span class="lp-name">Kolab Project</span>
-        <span class="lp-name">Wana Brands</span>
-        <span class="lp-name">Versus Cannabis</span>
-        <span class="lp-name">Houseplant</span>
-        <span class="lp-name">LP Placeholder</span>
-        <span class="lp-name">LP Placeholder</span>
+        <span class="lp-name"><img src="assets/lp-logos/tilray.png" alt="Tilray" onerror="this.replaceWith(document.createTextNode('Tilray'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/organigram.png" alt="Organigram" onerror="this.replaceWith(document.createTextNode('Organigram'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/auxly.png" alt="Auxly" onerror="this.replaceWith(document.createTextNode('Auxly'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/decibel.png" alt="Decibel Cannabis Company" onerror="this.replaceWith(document.createTextNode('Decibel Cannabis Company'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/pure-sunfarms.png" alt="Pure SunFarms" onerror="this.replaceWith(document.createTextNode('Pure SunFarms'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/weed-me.png" alt="Weed Me" onerror="this.replaceWith(document.createTextNode('Weed Me'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/budnked.png" alt="BudNked" onerror="this.replaceWith(document.createTextNode('BudNked'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/sndl.png" alt="SNDL" onerror="this.replaceWith(document.createTextNode('SNDL'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/space-race.png" alt="Space Race Cannabis" onerror="this.replaceWith(document.createTextNode('Space Race Cannabis'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/heritage.png" alt="Heritage" onerror="this.replaceWith(document.createTextNode('Heritage'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/canopy-growth.png" alt="Canopy Growth" onerror="this.replaceWith(document.createTextNode('Canopy Growth'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/cannapiece.png" alt="CannaPiece" onerror="this.replaceWith(document.createTextNode('CannaPiece'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/5-points.png" alt="5 Points Cannabis" onerror="this.replaceWith(document.createTextNode('5 Points Cannabis'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/hybrid-infusions.png" alt="Hybrid Infusions" onerror="this.replaceWith(document.createTextNode('Hybrid Infusions'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/canadas-island-garden.png" alt="Canada's Island Garden" onerror="this.replaceWith(document.createTextNode(&quot;Canada's Island Garden&quot;))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/prairie-craft.png" alt="Prairie Craft" onerror="this.replaceWith(document.createTextNode('Prairie Craft'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/herba-farms.png" alt="Herba Farms" onerror="this.replaceWith(document.createTextNode('Herba Farms'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/dom-jackson.png" alt="Dom Jackson" onerror="this.replaceWith(document.createTextNode('Dom Jackson'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/rubicon.png" alt="Rubicon" onerror="this.replaceWith(document.createTextNode('Rubicon'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/cannara.png" alt="Cannara" onerror="this.replaceWith(document.createTextNode('Cannara'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/olli.png" alt="Olli" onerror="this.replaceWith(document.createTextNode('Olli'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/sticky-greens.png" alt="Sticky Greens" onerror="this.replaceWith(document.createTextNode('Sticky Greens'))"></span>
       </div>
     </div>
   </div>
@@ -1162,14 +1303,14 @@ footer {
       <div class="expect-num">01</div>
       <div>
         <div class="expect-item-title">Food &amp; Drinks</div>
-        <div class="expect-item-desc">Dinner and drinks are on us all night. Just show up.</div>
+        <div class="expect-item-desc">Snacks and drinks available all night.</div>
       </div>
     </div>
     <div class="expect-item">
       <div class="expect-num">02</div>
       <div>
         <div class="expect-item-title">Live Entertainment</div>
-        <div class="expect-item-desc">A DJ, a comedian, and a caricature artist walk into a bar. It's a good night. The caricature station is brought to you by FIGR.</div>
+        <div class="expect-item-desc">Live DJ, Sterling Scott on stage, and a caricature artist courtesy of FIGR. It's a good night.</div>
       </div>
     </div>
     <div class="expect-item">
@@ -1182,8 +1323,15 @@ footer {
     <div class="expect-item">
       <div class="expect-num">04</div>
       <div>
-        <div class="expect-item-title">The People You Work With</div>
-        <div class="expect-item-desc">150+ retailers, budtenders, and partners in one room. No agenda. Just the industry getting together.</div>
+        <div class="expect-item-title">Real Connections</div>
+        <div class="expect-item-desc">One room, one industry, no agenda, no pressure. Just the people you work with every day.</div>
+      </div>
+    </div>
+    <div class="expect-item">
+      <div class="expect-num">05</div>
+      <div>
+        <div class="expect-item-title">LP Showcase</div>
+        <div class="expect-item-desc">20+ licensed producers set up across the venue — just for retailers and buyers. Walk the floor, sample products, and get some real face time with the brands you carry.</div>
       </div>
     </div>
   </div>
@@ -1201,10 +1349,11 @@ footer {
         <span class="schedule-time-badge">1:00 – 4:00 PM</span>
         <span class="schedule-period">Afternoon</span>
       </div>
-      <div class="schedule-block-title">Meet the LPs</div>
-      <div class="schedule-block-desc">LPs set up across the venue to connect directly with Saskatchewan retailers and budtenders. Walk the floor, ask questions, get some face time with the brands you carry.</div>
+      <div class="schedule-block-title">LP Showcase</div>
+      <div class="schedule-block-desc">20+ licensed producers set up across the venue exclusively for retailers and buyers. Walk the floor, sample products, ask questions, and spend some real face time with the brands you carry.</div>
       <div class="schedule-chips">
-        <span class="chip">LP Showcase</span>
+        <span class="chip">Retailing &amp; Buyers Only</span>
+        <span class="chip">20+ Licensed Producers</span>
         <span class="chip">Networking</span>
       </div>
     </div>
@@ -1214,12 +1363,13 @@ footer {
         <span class="schedule-period">Evening</span>
       </div>
       <div class="schedule-block-title">The Main Event</div>
-      <div class="schedule-block-desc">Doors open, drinks flow, the DJ's on. Catch a comedian, get your caricature done, and stay for the raffle draws. No itinerary — just a good night out with the industry.</div>
+      <div class="schedule-block-desc">Doors open, drinks flow, the DJ's on. Catch Sterling Scott live, get your caricature done, and stay for the raffle draws. No itinerary — just a good night out with the industry. Cash bar all night — by the round.</div>
       <div class="schedule-chips">
         <span class="chip">Food &amp; Drinks</span>
         <span class="chip">Live Entertainment</span>
         <span class="chip">Caricature Artist · FIGR</span>
         <span class="chip">Raffle Draws</span>
+        <span class="chip">LP Showcase</span>
       </div>
     </div>
   </div>
@@ -1251,14 +1401,12 @@ footer {
       <div class="eyebrow">Join Us</div>
       <h2 class="rsvp-heading">Reserve<br>Your <em>Spot</em></h2>
       <p class="rsvp-desc">
-        It's free. You just need to register so we know you're coming. You can add teammates during sign-up — the more the merrier, but spots are limited so don't sit on it.
+        Free to attend — registration required. Each team member needs to register individually. Spots are limited, so don't sit on it. Must be 19+ to attend.
       </p>
     </div>
     <div class="rsvp-contact">
       <div class="rsvp-contact-label">Got a question? Just reach out</div>
-      <div class="rsvp-contact-name">Ethan Tonnies</div>
       <div class="rsvp-contact-info">orders@openfields.ca</div>
-      <div class="rsvp-contact-info">306-774-9485</div>
     </div>
   </div>
   <div class="rsvp-right">
@@ -1267,10 +1415,10 @@ footer {
       <div class="rsvp-card-title">Grab your spot at SK Cannabis Connect 2026</div>
       <div class="rsvp-meta">
         <div class="rsvp-meta-line">Date — <span>June 18, 2026</span></div>
-        <div class="rsvp-meta-line">Venue — <span>Studio 301, Saskatoon</span></div>
+        <div class="rsvp-meta-line">Venue — <span>Studio 301, 301 1st Ave N, Saskatoon SK S7K 1X5</span></div>
         <div class="rsvp-meta-line">Admission — <span>Complimentary</span></div>
       </div>
-      <div data-tf-live="01KKF7B3E2ZBY9781B8HMHPQX8"></div>
+      <div data-tf-live="01KM3TC8QDKENQ48FTJPQD84CC"></div>
       <script src="//embed.typeform.com/next/embed.js"></script>
     </div>
   </div>
@@ -1278,7 +1426,10 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-left">Open Fields Distribution · SK Cannabis Connect 2026</div>
+  <div class="footer-left">
+    <img src="assets/open-fields-logo.png" alt="Open Fields Distribution" class="footer-logo" onerror="this.style.display='none'">
+    <span class="footer-tagline">Open Fields Distribution · SK Cannabis Connect 2026</span>
+  </div>
   <div class="footer-center">Saskatchewan's Cannabis Community</div>
   <div class="footer-right">
     orders@openfields.ca · 306-774-9485
