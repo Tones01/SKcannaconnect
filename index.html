@@ -351,6 +351,56 @@ nav {
   max-width: 36rem;
 }
 
+/* EVENT DETAILS STRIP */
+.event-details {
+  background: var(--green);
+  border-bottom: 1px solid rgba(244,239,228,0.08);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.event-detail-cell {
+  padding: 2.25rem 3rem;
+  border-right: 1px solid rgba(244,239,228,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.event-detail-cell:last-child { border-right: none; }
+
+.event-detail-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.7);
+}
+
+.event-detail-value {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+  color: var(--cream);
+  line-height: 1.1;
+}
+
+.event-detail-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(244,239,228,0.45);
+  letter-spacing: 0.06em;
+  margin-top: 0.15rem;
+}
+
+@media (max-width: 900px) {
+  .event-details { grid-template-columns: 1fr; }
+  .event-detail-cell { border-right: none; border-bottom: 1px solid rgba(244,239,228,0.08); padding: 1.75rem 1.5rem; }
+  .event-detail-cell:last-child { border-bottom: none; }
+}
+
+@media (max-width: 540px) {
+  .event-detail-cell { padding: 1.5rem 1.25rem; }
+}
+
 /* STATS */
 .stats {
   display: grid;
@@ -1177,6 +1227,25 @@ footer {
 </section>
 
 
+<!-- EVENT DETAILS STRIP -->
+<div class="event-details">
+  <div class="event-detail-cell">
+    <div class="event-detail-label">Date</div>
+    <div class="event-detail-value">June 18, 2026</div>
+    <div class="event-detail-sub">Thursday</div>
+  </div>
+  <div class="event-detail-cell">
+    <div class="event-detail-label">Schedule</div>
+    <div class="event-detail-value">1:00 – 4:00 PM</div>
+    <div class="event-detail-sub">LP Showcase · Retailers &amp; Buyers · Doors at 7:30 PM</div>
+  </div>
+  <div class="event-detail-cell">
+    <div class="event-detail-label">Venue</div>
+    <div class="event-detail-value">Studio 301</div>
+    <div class="event-detail-sub">301 1st Ave N, Saskatoon SK S7K 1X5</div>
+  </div>
+</div>
+
 <!-- STATS -->
 <section class="stats">
   <div class="stat">
@@ -1261,6 +1330,7 @@ footer {
         <span class="lp-name"><img src="assets/lp-logos/cannara.png" alt="Cannara" onerror="this.replaceWith(document.createTextNode('Cannara'))"></span>
         <span class="lp-name"><img src="assets/lp-logos/olli.png" alt="Olli" onerror="this.replaceWith(document.createTextNode('Olli'))"></span>
         <span class="lp-name"><img src="assets/lp-logos/sticky-greens.png" alt="Sticky Greens" onerror="this.replaceWith(document.createTextNode('Sticky Greens'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/Divvy_Logo_New Navy.png" alt="Divvy" onerror="this.replaceWith(document.createTextNode('Divvy'))"></span>
         <!-- duplicate for seamless loop -->
         <span class="lp-name"><img src="assets/lp-logos/tilray.png" alt="Tilray" onerror="this.replaceWith(document.createTextNode('Tilray'))"></span>
         <span class="lp-name"><img src="assets/lp-logos/organigram.png" alt="Organigram" onerror="this.replaceWith(document.createTextNode('Organigram'))"></span>
@@ -1284,6 +1354,7 @@ footer {
         <span class="lp-name"><img src="assets/lp-logos/cannara.png" alt="Cannara" onerror="this.replaceWith(document.createTextNode('Cannara'))"></span>
         <span class="lp-name"><img src="assets/lp-logos/olli.png" alt="Olli" onerror="this.replaceWith(document.createTextNode('Olli'))"></span>
         <span class="lp-name"><img src="assets/lp-logos/sticky-greens.png" alt="Sticky Greens" onerror="this.replaceWith(document.createTextNode('Sticky Greens'))"></span>
+        <span class="lp-name"><img src="assets/lp-logos/Divvy_Logo_New Navy.png" alt="Divvy" onerror="this.replaceWith(document.createTextNode('Divvy'))"></span>
       </div>
     </div>
   </div>
