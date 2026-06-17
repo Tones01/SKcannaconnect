@@ -1174,9 +1174,183 @@ footer {
 
   footer { padding: 2rem 1.25rem; }
 }
+
+/* VERIFICATION GATE */
+.verify-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(22, 47, 41, 0.96);
+  backdrop-filter: blur(10px);
+}
+body.verify-locked { overflow: hidden; }
+.verify-gate.hidden { display: none; }
+
+.verify-card {
+  width: 100%;
+  max-width: 30rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 2.5rem 2.25rem;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+}
+
+.verify-stamp {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem;
+}
+
+.verify-title {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 1.05;
+  color: var(--green);
+  margin-bottom: 0.6rem;
+}
+
+.verify-sub {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+  line-height: 1.45;
+}
+
+.verify-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem 0;
+  cursor: pointer;
+  border-top: 1px solid var(--border);
+}
+.verify-check:last-of-type { border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+
+.verify-check input { position: absolute; opacity: 0; pointer-events: none; }
+
+.verify-box {
+  flex: 0 0 1.1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.15rem;
+  border: 1.5px solid var(--green);
+  background: var(--warm-white);
+  position: relative;
+  transition: background 0.15s;
+}
+.verify-check input:checked + .verify-box {
+  background: var(--green);
+}
+.verify-check input:checked + .verify-box::after {
+  content: '';
+  position: absolute;
+  left: 0.28rem;
+  top: 0.05rem;
+  width: 0.3rem;
+  height: 0.6rem;
+  border: solid var(--gold);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.verify-check input:focus-visible + .verify-box {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.verify-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.verify-label strong { font-weight: 700; }
+
+.verify-btn {
+  width: 100%;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--green);
+  border: none;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+.verify-btn:hover:not(:disabled) { background: #0f2520; }
+.verify-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.verify-deny {
+  text-align: center;
+  margin-top: 1rem;
+}
+.verify-deny a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: underline;
+}
+.verify-deny a:hover { color: var(--ink); }
+
+.verify-fine {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+@media (max-width: 540px) {
+  .verify-card { padding: 2rem 1.5rem; }
+  .verify-title { font-size: 2rem; }
+}
+
 </style>
 </head>
 <body>
+
+<!-- AGE & INDUSTRY VERIFICATION GATE -->
+<div id="verify-gate" class="verify-gate" role="dialog" aria-modal="true" aria-labelledby="verify-title">
+  <div class="verify-card">
+    <div class="verify-stamp">Restricted Access</div>
+    <h2 id="verify-title" class="verify-title">Verify to Enter</h2>
+    <p class="verify-sub">SK Cannabis Connect is an industry-only event. Please confirm before continuing.</p>
+
+    <label class="verify-check">
+      <input type="checkbox" id="verify-age">
+      <span class="verify-box" aria-hidden="true"></span>
+      <span class="verify-label">I am <strong>19 years of age or older</strong>.</span>
+    </label>
+
+    <label class="verify-check">
+      <input type="checkbox" id="verify-cannasell">
+      <span class="verify-box" aria-hidden="true"></span>
+      <span class="verify-label">I am <strong>CannaSell Certified</strong> and work in the cannabis industry.</span>
+    </label>
+
+    <button type="button" id="verify-enter" class="verify-btn" disabled>Enter Site</button>
+    <p class="verify-deny"><a href="https://www.google.com" id="verify-exit">I do not qualify — exit</a></p>
+    <p class="verify-fine">By entering, you confirm the above statements are true. Misrepresentation may result in denied entry to the event.</p>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1506,6 +1680,42 @@ footer {
     orders@openfields.ca · 306-774-9485
   </div>
 </footer>
+
+<script>
+(function() {
+  var gate = document.getElementById('verify-gate');
+  var ageBox = document.getElementById('verify-age');
+  var csBox = document.getElementById('verify-cannasell');
+  var btn = document.getElementById('verify-enter');
+  var exitLink = document.getElementById('verify-exit');
+  var STORAGE_KEY = 'skcc-verified-2026';
+
+  if (sessionStorage.getItem(STORAGE_KEY) === 'yes') {
+    gate.classList.add('hidden');
+    return;
+  }
+
+  document.body.classList.add('verify-locked');
+
+  function update() {
+    btn.disabled = !(ageBox.checked && csBox.checked);
+  }
+  ageBox.addEventListener('change', update);
+  csBox.addEventListener('change', update);
+
+  btn.addEventListener('click', function() {
+    if (btn.disabled) return;
+    sessionStorage.setItem(STORAGE_KEY, 'yes');
+    gate.classList.add('hidden');
+    document.body.classList.remove('verify-locked');
+  });
+
+  exitLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'https://www.google.com';
+  });
+})();
+</script>
 
 </body>
 </html>
