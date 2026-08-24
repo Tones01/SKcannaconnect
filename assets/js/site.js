@@ -34,9 +34,10 @@
 var NEWSLETTER = {
   mode: 'sheet',
 
-  // mode: 'sheet' — paste the Apps Script /exec URL into sheetUrl to go live.
-  // Until it is filled in, the form quietly falls back to mailto below.
-  sheetUrl: '',
+  // mode: 'sheet' — the Apps Script web app bound to the signups sheet.
+  // Redeploying as a NEW DEPLOYMENT (rather than a new version of this one)
+  // issues a different /exec URL and this must be updated to match.
+  sheetUrl: 'https://script.google.com/macros/s/AKfycbyyv_eZ9SjAkwQLpYSoeSFsGSRRB_kzH_Iumn-db1lHco0M1K0rZVP1XzdRvFNsHbmu/exec',
   sheetToken: 'm0a2bf3axcig9m433jixf0no374ze5i2',
 
   // mode: 'post'
