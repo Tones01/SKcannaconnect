@@ -6,13 +6,13 @@
 /* --------------------------------------------------------------------------
    1. WHERE THE EMAIL SIGNUPS GO  ←  the one thing you need to configure
    --------------------------------------------------------------------------
-   Set NEWSLETTER.mode and its matching field. Nothing else needs to change.
+   Set NEWSLETTER.mode and its matching URL. Nothing else needs to change.
 
    'sheet'    — append each address as a row in a Google Sheet, via an Apps
-                Script web app bound to that sheet. Free, and the list stays
-                in your Drive. Set `sheetUrl` (the /exec URL Apps Script
-                gives you on deploy) and `sheetToken` to match the SECRET in
-                the script. Setup steps: tools/google-sheet-endpoint.gs
+                Script web app bound to that sheet. This is what runs today.
+                Set `sheetUrl` (the /exec URL Apps Script gives you on deploy)
+                and `sheetToken` to match the SECRET in the script.
+                Setup steps: tools/google-sheet-endpoint.gs
 
    'post'     — POST the address to a form or list provider that accepts JSON
                 and sends permissive CORS headers:
@@ -25,10 +25,9 @@
                 address they typed carried across in a query parameter.
                 Set `redirectUrl` and `emailParam`.
 
-   'mailto'   — no service. Opens the visitor's mail app with the address
-                pre-filled and you add them to your list by hand. Zero setup,
-                but it loses everyone who has no mail client configured.
-                A stopgap, not the real answer.
+   A failed write is retried twice before the visitor sees anything. If it
+   still will not save, they are shown `contactEmail` as plain text — the form
+   never opens a mail client, and never claims success it did not get.
    -------------------------------------------------------------------------- */
 
 var NEWSLETTER = {
@@ -47,9 +46,8 @@ var NEWSLETTER = {
   redirectUrl: '',
   emailParam: 'email',
 
-  // mode: 'mailto', and the address shown if a send fails
-  mailto: 'etonnies@openfields.ca',
-  mailtoSubject: 'SK Cannabis Connect 2027 — notify me'
+  // Shown as text if a signup will not save. Not a link, not a fallback.
+  contactEmail: 'etonnies@openfields.ca'
 };
 
 (function () {
@@ -229,9 +227,19 @@ var NEWSLETTER = {
       error.hidden = false;
     }
 
-    function send(url, contentType, payload) {
+    var label = button.textContent;
+
+    /* A signup is worth more than one attempt: a cold Apps Script instance or
+       a dropped connection should not cost an address. Three tries, backing
+       off, before the visitor is told anything went wrong. */
+    var RETRY_DELAYS = [700, 1800];
+
+    function send(url, contentType, payload, attempt) {
+      attempt = attempt || 0;
       button.disabled = true;
+      button.textContent = 'Sending…';
       if (error) error.hidden = true;
+
       /* text/plain keeps this a "simple" request, so the browser skips the
          CORS preflight — Apps Script web apps do not answer one. */
       fetch(url, {
@@ -242,8 +250,15 @@ var NEWSLETTER = {
         if (!res.ok) throw new Error(res.status);
         confirmSignup();
       }).catch(function () {
+        if (attempt < RETRY_DELAYS.length) {
+          window.setTimeout(function () {
+            send(url, contentType, payload, attempt + 1);
+          }, RETRY_DELAYS[attempt]);
+          return;
+        }
         button.disabled = false;
-        fail('That did not go through. Email ' + NEWSLETTER.mailto + ' and we will add you.');
+        button.textContent = label;
+        fail('That did not save. Try again, or reach us at ' + NEWSLETTER.contactEmail + '.');
       });
     }
 
@@ -282,11 +297,13 @@ var NEWSLETTER = {
         return;
       }
 
-      /* Default: hand off to the visitor's mail client. */
-      window.location.href = 'mailto:' + NEWSLETTER.mailto +
-        '?subject=' + encodeURIComponent(NEWSLETTER.mailtoSubject) +
-        '&body=' + encodeURIComponent('Please add ' + email + ' to the SK Cannabis Connect 2027 list.');
-      confirmSignup();
+      /* No destination configured. Say so rather than swallowing the address
+         or opening a mail client behind the visitor's back. */
+      if (window.console) {
+        console.error('NEWSLETTER is misconfigured: mode "' + NEWSLETTER.mode +
+          '" has no matching URL set. The signup was not saved.');
+      }
+      fail('That did not save. Try again, or reach us at ' + NEWSLETTER.contactEmail + '.');
     });
   }
 

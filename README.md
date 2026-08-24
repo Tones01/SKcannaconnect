@@ -26,17 +26,22 @@ top** — it is the first thing in the file, and nothing else needs to change.
 
 ```js
 var NEWSLETTER = {
-  mode: 'mailto',   // 'sheet' | 'post' | 'redirect' | 'mailto'
+  mode: 'sheet',   // 'sheet' | 'post' | 'redirect'
   ...
 };
 ```
 
 | `mode` | What happens | Set |
 |---|---|---|
-| `'sheet'` | Appends a row to a Google Sheet in your Drive. Free, no third-party account. **See below.** | `sheetUrl`, `sheetToken` |
+| `'sheet'` | Appends a row to a Google Sheet in your Drive. Free, no third-party account. **This is what runs today.** | `sheetUrl`, `sheetToken` |
 | `'post'` | POSTs `{ email, source, page }` as JSON to a form or list provider — Formspree, Buttondown, a Netlify function, a Cloudflare Worker. The provider must send permissive CORS headers. | `endpoint` |
 | `'redirect'` | Sends the visitor to a hosted form you already run (Typeform, Google Form, Mailchimp), carrying the address across in a query parameter. | `redirectUrl`, `emailParam` |
-| `'mailto'` | Opens the visitor's mail app addressed to you. No setup, but it loses anyone without a mail client configured. **This is what ships today.** | `mailto` |
+
+The form never opens a mail client. A failed write is retried twice, backing
+off, before the visitor is told anything is wrong — a cold Apps Script instance
+or a dropped connection should not cost an address. If it still will not save,
+they see `contactEmail` as plain text and the form stays usable so they can try
+again. It never shows the confirmation for a signup that did not land.
 
 A hidden honeypot field sits in the form; anything that fills it is silently
 dropped without a request going out. Bots see the same confirmation everyone
