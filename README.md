@@ -7,6 +7,10 @@ GitHub Pages at [skcannaconnect.ca](https://skcannaconnect.ca) on every push to
 
 Plain static HTML/CSS/JS — no build step. Edit a file, push, done.
 
+The deploy stamps a content hash onto the CSS and JS URLs
+(`tools/stamp-assets.py`) so a push is never served from a visitor's cache.
+It runs in CI only; the files in the repo stay clean.
+
 ## Pages
 
 | File | Screen | Job |
