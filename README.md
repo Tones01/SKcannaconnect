@@ -60,13 +60,25 @@ short version:
 4. In `assets/js/site.js` set `mode: 'sheet'`, `sheetUrl` to that URL, and
    `sheetToken` to the same string as `SECRET`. Push.
 
-Two things that trip people up:
+Pick `setup` in the editor's function dropdown and Run it once before
+deploying — it writes the header row and logs which sheet it reached, so a
+mis-wired script shows up now rather than as signups that silently vanish.
+
+Four things that trip people up:
 
 - **Access must be "Anyone", not "Anyone with a Google account."** The second
   one makes every signup fail, because visitors are not signed in to Google.
+  On a Workspace account an admin policy can remove the "Anyone" option
+  entirely; if it is not in the dropdown, the endpoint cannot be public.
+- **Open the editor from inside the Sheet** (Extensions → Apps Script), which
+  binds the script to it. A standalone project from script.google.com has no
+  sheet attached — set `SHEET_ID` in the script if you went that route.
 - **Editing the script does not update the live endpoint.** Deploy → Manage
   deployments → edit → Version: New version → Deploy. Keep the same deployment
   and the `/exec` URL stays the same, so the site needs no change.
+- **Whoever deploys it owns it.** The endpoint runs as that account. If it is a
+  work account that later gets deleted, signups stop with no warning — so put
+  the Sheet in a Shared Drive and note who holds the deployment.
 
 `sheetToken` is not a password — it ships in the site's JavaScript where anyone
 can read it. It only stops drive-by bots that find the `/exec` URL from filling

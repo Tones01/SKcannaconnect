@@ -13,6 +13,10 @@
  * 2. In that sheet: Extensions → Apps Script. Delete the placeholder code and
  *    paste this whole file in. Save.
  *
+ *    It matters that you open the editor from inside the sheet — that binds
+ *    the script to it. If you started at script.google.com instead, there is
+ *    no sheet attached; set SHEET_ID below to fix that.
+ *
  * 3. Nothing to change — SECRET below is already filled in and already matches
  *    sheetToken in assets/js/site.js. It is not a password: it ends up in the
  *    site's JavaScript where anyone can read it. It only stops drive-by bots
@@ -23,6 +27,10 @@
  *      Who has access:  Anyone            ← must be "Anyone", not
  *                                           "Anyone with a Google account"
  *    Deploy, approve the permissions prompt, and copy the /exec URL.
+ *
+ *    On a Google Workspace account an admin policy can remove the "Anyone"
+ *    option, leaving only the domain. Signups from the public site fail if
+ *    so — ask an admin to allow it, or host the endpoint elsewhere.
  *
  * 5. In `assets/js/site.js`, paste the /exec URL from step 4 into `sheetUrl`.
  *    `mode` and `sheetToken` are already set. Commit and push.
@@ -42,6 +50,33 @@
 var SECRET = 'm0a2bf3axcig9m433jixf0no374ze5i2';
 var SHEET_NAME = 'Signups';
 var HEADERS = ['Timestamp', 'Email', 'Source', 'Page'];
+
+/**
+ * Leave empty if you opened this script from inside the Sheet
+ * (Extensions -> Apps Script). It then writes to the sheet it belongs to.
+ *
+ * Fill it in only if this is a standalone project (script.google.com ->
+ * New project), which has no sheet attached. Paste the long id from the
+ * sheet's own URL, the part between /d/ and /edit:
+ *   docs.google.com/spreadsheets/d/THIS_PART_HERE/edit
+ */
+var SHEET_ID = '';
+
+/**
+ * Run this once from the editor to check the wiring: pick `setup` in the
+ * function dropdown, press Run, approve the permissions prompt.
+ *
+ * It writes the header row and logs which sheet it reached, so you find out
+ * now rather than from a signup that silently vanishes.
+ */
+function setup() {
+  var sheet = getSheet();
+  var book = sheet.getParent();
+  Logger.log('Connected to: ' + book.getName());
+  Logger.log('URL: ' + book.getUrl());
+  Logger.log('Tab: ' + sheet.getName() + ', rows so far: ' + Math.max(0, sheet.getLastRow() - 1));
+  Logger.log('Looks good. Now Deploy -> New deployment -> Web app.');
+}
 
 function doPost(e) {
   // One writer at a time, so two signups in the same second cannot land on
@@ -91,7 +126,16 @@ function doGet() {
 }
 
 function getSheet() {
-  var book = SpreadsheetApp.getActiveSpreadsheet();
+  var book = SHEET_ID
+    ? SpreadsheetApp.openById(SHEET_ID)
+    : SpreadsheetApp.getActiveSpreadsheet();
+
+  if (!book) {
+    throw new Error(
+      'No spreadsheet attached. Either open this script from inside the ' +
+      'Sheet (Extensions -> Apps Script), or set SHEET_ID above.');
+  }
+
   var sheet = book.getSheetByName(SHEET_NAME) || book.insertSheet(SHEET_NAME);
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
