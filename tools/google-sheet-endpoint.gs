@@ -13,9 +13,10 @@
  * 2. In that sheet: Extensions → Apps Script. Delete the placeholder code and
  *    paste this whole file in. Save.
  *
- * 3. Change SECRET below to any random string. It is not a password — it ends
- *    up in the site's JavaScript, where anyone can read it. It only stops
- *    drive-by bots that find the /exec URL from filling your sheet with junk.
+ * 3. Nothing to change — SECRET below is already filled in and already matches
+ *    sheetToken in assets/js/site.js. It is not a password: it ends up in the
+ *    site's JavaScript where anyone can read it. It only stops drive-by bots
+ *    that find the /exec URL from filling your sheet with junk.
  *
  * 4. Deploy → New deployment → type "Web app".
  *      Execute as:      Me
@@ -23,11 +24,8 @@
  *                                           "Anyone with a Google account"
  *    Deploy, approve the permissions prompt, and copy the /exec URL.
  *
- * 5. In `assets/js/site.js`, set:
- *      mode:       'sheet'
- *      sheetUrl:   the /exec URL from step 4
- *      sheetToken: the same string as SECRET
- *    Commit and push.
+ * 5. In `assets/js/site.js`, paste the /exec URL from step 4 into `sheetUrl`.
+ *    `mode` and `sheetToken` are already set. Commit and push.
  *
  * 6. Open the /exec URL in a browser. It should say the endpoint is live.
  *    Then submit the real form once and check the sheet.
@@ -41,7 +39,7 @@
  * URL, so the site needs no change.
  */
 
-var SECRET = 'change-me';
+var SECRET = 'm0a2bf3axcig9m433jixf0no374ze5i2';
 var SHEET_NAME = 'Signups';
 var HEADERS = ['Timestamp', 'Email', 'Source', 'Page'];
 

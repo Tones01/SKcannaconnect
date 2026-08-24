@@ -32,11 +32,12 @@
    -------------------------------------------------------------------------- */
 
 var NEWSLETTER = {
-  mode: 'mailto',
+  mode: 'sheet',
 
-  // mode: 'sheet'
+  // mode: 'sheet' — paste the Apps Script /exec URL into sheetUrl to go live.
+  // Until it is filled in, the form quietly falls back to mailto below.
   sheetUrl: '',
-  sheetToken: '',
+  sheetToken: 'm0a2bf3axcig9m433jixf0no374ze5i2',
 
   // mode: 'post'
   endpoint: '',
