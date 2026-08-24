@@ -8,14 +8,14 @@
    --------------------------------------------------------------------------
    Set NEWSLETTER.mode and its matching field. Nothing else needs to change.
 
-   'mailto'   — no service. Opens the visitor's mail app with the address
-                pre-filled and you add them to your list by hand.
-                Zero setup, but it loses everyone who has no mail client
-                configured. Fine as a stopgap, not as the real answer.
+   'sheet'    — append each address as a row in a Google Sheet, via an Apps
+                Script web app bound to that sheet. Free, and the list stays
+                in your Drive. Set `sheetUrl` (the /exec URL Apps Script
+                gives you on deploy) and `sheetToken` to match the SECRET in
+                the script. Setup steps: tools/google-sheet-endpoint.gs
 
-   'post'     — POST the address to a form/list endpoint. This is the one to
-                use. Works with any endpoint that accepts a JSON POST and
-                sends permissive CORS headers:
+   'post'     — POST the address to a form or list provider that accepts JSON
+                and sends permissive CORS headers:
                   Formspree   https://formspree.io/f/XXXXXXX
                   Buttondown  https://buttondown.com/api/emails/embed-subscribe/YOURNAME
                   Netlify / Cloudflare Worker / your own /api/subscribe
@@ -24,21 +24,30 @@
                 (Typeform, Google Form, Mailchimp hosted signup) with the
                 address they typed carried across in a query parameter.
                 Set `redirectUrl` and `emailParam`.
+
+   'mailto'   — no service. Opens the visitor's mail app with the address
+                pre-filled and you add them to your list by hand. Zero setup,
+                but it loses everyone who has no mail client configured.
+                A stopgap, not the real answer.
    -------------------------------------------------------------------------- */
 
 var NEWSLETTER = {
   mode: 'mailto',
 
-  // mode: 'mailto'
-  mailto: 'etonnies@openfields.ca',
-  mailtoSubject: 'SK Cannabis Connect 2027 — notify me',
+  // mode: 'sheet'
+  sheetUrl: '',
+  sheetToken: '',
 
   // mode: 'post'
   endpoint: '',
 
   // mode: 'redirect'
   redirectUrl: '',
-  emailParam: 'email'
+  emailParam: 'email',
+
+  // mode: 'mailto', and the address shown if a send fails
+  mailto: 'etonnies@openfields.ca',
+  mailtoSubject: 'SK Cannabis Connect 2027 — notify me'
 };
 
 (function () {
@@ -218,32 +227,56 @@ var NEWSLETTER = {
       error.hidden = false;
     }
 
+    function send(url, contentType, payload) {
+      button.disabled = true;
+      if (error) error.hidden = true;
+      /* text/plain keeps this a "simple" request, so the browser skips the
+         CORS preflight — Apps Script web apps do not answer one. */
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': contentType, 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        confirmSignup();
+      }).catch(function () {
+        button.disabled = false;
+        fail('That did not go through. Email ' + NEWSLETTER.mailto + ' and we will add you.');
+      });
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      /* Bots fill the hidden field; people never see it. Look successful and
+         drop it on the floor. */
+      var trap = form.querySelector('[data-notify-trap]');
+      if (trap && trap.value) { confirmSignup(); return; }
+
       var email = (input.value || '').trim();
       if (!email) return;
+
+      var payload = {
+        email: email,
+        source: 'skcannaconnect.ca',
+        page: window.location.pathname
+      };
+
+      if (NEWSLETTER.mode === 'sheet' && NEWSLETTER.sheetUrl) {
+        payload.token = NEWSLETTER.sheetToken;
+        send(NEWSLETTER.sheetUrl, 'text/plain;charset=utf-8', payload);
+        return;
+      }
+
+      if (NEWSLETTER.mode === 'post' && NEWSLETTER.endpoint) {
+        send(NEWSLETTER.endpoint, 'application/json', payload);
+        return;
+      }
 
       if (NEWSLETTER.mode === 'redirect' && NEWSLETTER.redirectUrl) {
         var joiner = NEWSLETTER.redirectUrl.indexOf('?') === -1 ? '?' : '&';
         window.location.href = NEWSLETTER.redirectUrl + joiner +
           encodeURIComponent(NEWSLETTER.emailParam) + '=' + encodeURIComponent(email);
-        return;
-      }
-
-      if (NEWSLETTER.mode === 'post' && NEWSLETTER.endpoint) {
-        button.disabled = true;
-        if (error) error.hidden = true;
-        fetch(NEWSLETTER.endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ email: email, source: 'skcannaconnect.ca' })
-        }).then(function (res) {
-          if (!res.ok) throw new Error(res.status);
-          confirmSignup();
-        }).catch(function () {
-          button.disabled = false;
-          fail('That did not go through. Email ' + NEWSLETTER.mailto + ' and we will add you.');
-        });
         return;
       }
 

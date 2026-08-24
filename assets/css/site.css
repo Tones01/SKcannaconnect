@@ -415,6 +415,16 @@ p { text-wrap: pretty; }
 .notify-form input[type="email"]:focus { border-color: var(--ochre); }
 .notify-form button { flex-shrink: 0; }
 
+/* Honeypot: off-screen for people, fillable by bots. */
+.notify-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .notify-fine { margin: 16px 0 0; font-size: 13px; line-height: 1.5; color: var(--ivory-60); }
 .notify-error { margin: 16px 0 0; font-size: 13px; line-height: 1.5; color: var(--ochre); }
 
