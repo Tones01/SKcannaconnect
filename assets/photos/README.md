@@ -15,8 +15,8 @@ Photography from the June 2026 Open Fields shoot, re-exported for the web.
 Crops matter — faces are centred inside the visible band. If you swap a frame,
 re-check its `object-position`.
 
-## Not in use
+## Removed
 
-`photo-01.jpg` through `photo-09.jpg` are camera originals from the previous
-version of this site's gallery (about 38 MB in total). Nothing references them.
-Delete them if you have the originals elsewhere.
+`photo-01.jpg` through `photo-09.jpg` were camera originals from the previous
+version of this site's gallery. Nothing referenced them and they were about
+38 MB, so they were deleted — recoverable from git history if ever needed.

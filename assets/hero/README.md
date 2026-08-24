@@ -6,5 +6,3 @@
 Replace it with a 2400-2560px wide JPEG at q70-78, 250-500 KB. Keep the
 filename; `index.html` preloads it by name. If the new frame crops badly,
 adjust `background-position` on `.home-hero .hero-bg` in `assets/css/site.css`.
-
-`hero.jpg` is left over from the previous version of the site and is unused.

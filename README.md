@@ -145,7 +145,9 @@ assets/
 Script to paste into a Google Sheet if you use `'sheet'` mode.
 
 Photography is re-exported for the web (heroes 2400px wide, gallery frames
-1200–1400px). The camera originals live with Open Fields, not in this repo.
+1200–1400px). The camera originals live with Open Fields, not in this repo —
+the whole `assets/` tree is about 3 MB, and it is worth keeping it that way,
+since every file here ships in the Pages artifact on every deploy.
 
 Type is **Hanken Grotesk** with **Newsreader** italic for the pull-quote, both
 self-hosted under the Open Font License. They stand in for the brand faces,
