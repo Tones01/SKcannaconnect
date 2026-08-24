@@ -18,6 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # Browsers cache assets/js/site.js. Without a changing URL a deploy can
+      # land and visitors keep running the old one.
+      - name: Stamp asset URLs with a content hash
+        run: python3 tools/stamp-assets.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
