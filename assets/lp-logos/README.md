@@ -1,35 +1,46 @@
-# LP Logos
+# Producer logos
 
-Place logos for each LP in this folder. The marquee will display these logos instead of text.
+The 22 producers who exhibited at SK Cannabis Connect 2026, shown as the logo
+wall on `past-events.html` in this order. Third-party marks, used with
+permission as past-exhibitor credits.
 
-## Naming Convention
+Several are dark-on-transparent, which is why the wall sits on the Ivory band.
 
-Use the exact filenames below. Preferred format: **PNG with transparent background**, sized roughly **160×60px** (wider logos may vary).
-
-| Company | Filename |
+| File | Displays as |
 |---|---|
-| Tilray | `tilray.png` |
-| Organigram | `organigram.png` |
-| Auxly | `auxly.png` |
-| Decibel Cannabis Company | `decibel.png` |
-| Pure SunFarms | `pure-sunfarms.png` |
-| Weed Me | `weed-me.png` |
-| BudNked | `budnked.png` |
-| SNDL | `sndl.png` |
-| Space Race Cannabis | `space-race.png` |
-| Heritage | `heritage.png` |
-| Canopy Growth | `canopy-growth.png` |
-| CannaPiece | `cannapiece.png` |
-| 5 Points Cannabis | `5-points.png` |
-| Hybrid Infusions | `hybrid-infusions.png` |
-| Canada's Island Garden | `canadas-island-garden.png` |
-| Prairie Craft | `prairie-craft.png` |
-| Herba Farms | `herba-farms.png` |
-| Dom Jackson | `dom-jackson.png` |
-| Rubicon | `rubicon.png` |
+| `auxly.png` | Auxly |
+| `canopy-growth.png` | Canopy Growth |
+| `organigram.png` | Organigram Global |
+| `tilray.png` | Portal |
+| `sndl.png` | SNDL |
+| `decibel.png` | Decibel |
+| `pure-sunfarms.png` | Pure Sunfarms |
+| `cannara.png` | Cannara |
+| `cannapiece.png` | CannaPiece Corp |
+| `rubicon.png` | Rubicon Organics |
+| `heritage.png` | Heritage Cannabis |
+| `canadas-island-garden.png` | FIGR — Fresh Island Grown |
+| `olli.png` | OBi |
+| `weed-me.png` | Weed Me |
+| `space-race.png` | Space Race Cannabis |
+| `sticky-greens.png` | Sticky Greens |
+| `herba-farms.png` | Herba |
+| `prairie-craft.png` | Prairie Craft Canopy |
+| `hybrid-infusions.png` | Virtue Cannabis |
+| `dom-jackson.png` | Dom Jackson Craft Cannabis |
+| `budnked.png` | BudNked |
+| `5-points.png` | Er What? |
 
-## Notes
+Five filenames no longer match the brand's display name after historic
+renames — `tilray.png` is Portal, `olli.png` is OBi, `hybrid-infusions.png` is
+Virtue Cannabis, `canadas-island-garden.png` is FIGR, `5-points.png` is
+Er What?. Trust the `alt`/`title` in the markup, not the filename.
 
-- If a logo file is missing, the company name will display as text automatically (fallback).
-- Dark/colour logos work best — the marquee background is a light cream (`#F0EBE0`).
-- On hover, the tile flips to a dark green background, so logos with transparent backgrounds will adapt best.
+`Divvy_Logo_New Navy.png` is in the folder but not on the wall.
+
+## Adding one
+
+PNG with a transparent background, 176px tall (the wall renders at
+`max-height: 44px`), optimised to roughly 40 KB or less. Add a cell to
+`<div class="producer-wall">` in `past-events.html` with matching `alt` and
+`title`.
