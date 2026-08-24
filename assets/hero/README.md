@@ -1,13 +1,10 @@
 # Hero Image
 
-Drop your hero image here and name it `hero.jpg`.
+`skcc-hero.jpg` — the full-bleed background on the home page
+(`background-position: 62% 12%`, under a flat `rgba(8,8,8,0.6)` scrim).
 
-The site will automatically use it as the full-bleed background on the homepage hero section.
+Replace it with a 2400-2560px wide JPEG at q70-78, 250-500 KB. Keep the
+filename; `index.html` preloads it by name. If the new frame crops badly,
+adjust `background-position` on `.home-hero .hero-bg` in `assets/css/site.css`.
 
-**Recommended specs:**
-- File name: `hero.jpg`
-- Dimensions: 1920 × 1080 px minimum (wider is better)
-- Format: JPG or WebP
-- Orientation: landscape
-
-If you want to use a different filename or format, update the `background-image` URL in the `.hero` CSS block in `index.html`.
+`hero.jpg` is left over from the previous version of the site and is unused.

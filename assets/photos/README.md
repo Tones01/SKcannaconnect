@@ -1,13 +1,22 @@
 # Event Photos
 
-Drop your event photos here, named sequentially:
+Photography from the June 2026 Open Fields shoot, re-exported for the web.
 
-- `photo-01.jpg`
-- `photo-02.jpg`
-- `photo-03.jpg`
-- ... and so on
+## In use
 
-Recommended format: JPG, landscape or portrait both work (masonry layout handles mixed orientations).
+| File | Where |
+|---|---|
+| `showcase-floor.jpg` | Past events hero |
+| `exhibitors-floor.jpg` | Exhibitors hero |
+| `booth-figr.jpg` | Photo trio, left |
+| `sterling-scott.jpg` | Photo trio, centre (`object-position: 34% center`) |
+| `booth-broken-coast-table.jpg` | Photo trio, right (`object-position: 34% center`) |
 
-The gallery in index.html references photo-01.jpg through photo-20.jpg by default.
-Add more <img> tags inside the .gallery-grid div if you have more than 20 photos.
+Crops matter — faces are centred inside the visible band. If you swap a frame,
+re-check its `object-position`.
+
+## Not in use
+
+`photo-01.jpg` through `photo-09.jpg` are camera originals from the previous
+version of this site's gallery (about 38 MB in total). Nothing references them.
+Delete them if you have the originals elsewhere.
